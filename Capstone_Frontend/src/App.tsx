@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Importing layout components for the public website and admin dashboard
 import PublicLayout from "./layouts/PublicLayout";
-// import AdminLayout from "./layouts/AdminLayout";
+import AdminLayout from "./layouts/AdminLayout";
 
 // Importing page components for the public website
 import HomePage from "./pages/HomePage";
