@@ -1,5 +1,7 @@
 // Importing necessary libraries and components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+
 // Importing layout components for the public website and admin dashboard
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
