@@ -1,4 +1,4 @@
-// Import necessary hooks and services for managing tasks and projects
+// Import necessary dependencies and services for managing tasks and projects, as well as custom hooks for CRUD operations and form handling.
 import { useEffect, useState } from "react";
 
 import {
@@ -14,6 +14,7 @@ import type { Task } from "../types/Task";
 import type { Project } from "../types/Project";
 
 import { useCrud } from "../hooks/useCrud";
+import { useForm } from "../hooks/useForm";
 
 // TasksPage component to display a list of tasks in the admin dashboard
 const TasksPage = () => {
@@ -32,18 +33,18 @@ const TasksPage = () => {
     deleteItem: deleteTask,
   });
 
-  // State variable to manage the list of projects for task assignment
+  // State variable to manage the list of projects, which is used to associate tasks with specific projects when creating or updating tasks. It is populated by fetching the projects from the API when the component mounts.
   const [projects, setProjects] = useState<Project[]>([]);
 
-  // State variable to manage the form data for creating a new task, including title, description, status, and associated project ID
-  const [formData, setFormData] = useState({
+  // State variable to manage the form data for creating a new task, including title, description, status, and associated project ID. It uses the useForm custom hook to handle form state and input changes.
+  const { formData, handleChange, resetForm } = useForm({
     title: "",
     description: "",
     status: "todo" as Task["status"],
     projectId: "",
   });
 
-  //
+  // useEffect hook to fetch projects from the API when the component mounts. It calls the getProjects service function, updates the state with the retrieved projects, and handles any errors that may occur during the fetch process.
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -57,21 +58,7 @@ const TasksPage = () => {
     fetchProjects();
   }, [setError]);
 
-  // Function to handle changes in the form input fields for creating a new task. It updates the formData state with the current values entered by the user in the input fields.
-  const handleChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = event.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Function to handle the creation of a new task when the form is submitted. It prevents the default form submission behavior, calls the addItem function from the useCrud hook to create a new task with the data from the form, and resets the form data after successful creation. It also handles any errors that may occur during the task creation process.
+  // Function to handle the submission of the form for creating a new task. It calls the addItem function from the useCrud hook to create a new task with the form data, and resets the form after successful creation. If there is an error during task creation, it sets an error message in the state.
   const handleCreateTask = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -79,19 +66,13 @@ const TasksPage = () => {
 
     try {
       await addItem(formData);
-
-      setFormData({
-        title: "",
-        description: "",
-        status: "todo",
-        projectId: "",
-      });
+      resetForm();
     } catch {
       setError("Unable to create task.");
     }
   };
 
-  // Function to handle changes in the status of a task. It takes the task ID and the new status as arguments, calls the editItem function from the useCrud hook to update the task's status, and handles any errors that may occur during the update process.
+  // Function to handle changes in the task status for a specific task. It calls the editItem function from the useCrud hook to update the task's status, and sets an error message if there is an issue during the update process.
   const handleStatusChange = async (
     id: string,
     status: Task["status"]
@@ -103,7 +84,7 @@ const TasksPage = () => {
     }
   };
 
-  //
+  // Function to handle the deletion of a task. It calls the removeItem function from the useCrud hook to delete the task, and sets an error message if there is an issue during the deletion process.
   const handleDeleteTask = async (id: string) => {
     try {
       await removeItem(id);
@@ -205,5 +186,4 @@ const TasksPage = () => {
   );
 };
 
-// Export the TasksPage component as the default export of this module, allowing it to be imported and used in other parts of the application, such as in the routing configuration for the admin dashboard.
 export default TasksPage;
