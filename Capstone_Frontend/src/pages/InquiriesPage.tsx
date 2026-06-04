@@ -1,123 +1,166 @@
-//Import necessary hooks and services
-import { useEffect, useState } from "react";
+// Import necessary hooks and services
 import type { Inquiry } from "../types/Inquiry";
-import { getInquiries, updateInquiry } from "../services/inquiryService";
+
+import {
+  getInquiries,
+  updateInquiry,
+  deleteInquiry,
+} from "../services/inquiryService";
+
 import { createProject } from "../services/projectService";
 
+import { useCrud } from "../hooks/useCrud";
 
-// InquiriesPage component to display a list of client inquiries in the admin dashboard
+// InquiriesPage component to display and manage client inquiries
 const InquiriesPage = () => {
-    // State variables to manage the list of inquiries, loading state, and error messages
-    const [inquiries, setInquiries] = useState<Inquiry[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
+  // Use the reusable CRUD hook to manage inquiries
+  const {
+    items: inquiries,
+    isLoading,
+    error,
+    setError,
+    editItem,
+    removeItem,
+  } = useCrud<Inquiry>({
+    getItems: getInquiries,
+    updateItem: updateInquiry,
+    deleteItem: deleteInquiry,
+  });
 
-    const handleCreateProject = async (inquiry: Inquiry) => {
-        try {
-            await createProject({
-                title: `${inquiry.businessName || inquiry.clientName} Project`,
-                description: inquiry.message,
-                clientName: inquiry.clientName,
-                clientEmail: inquiry.email,
-                stage: "planning",
-                inquiryId: inquiry._id,
-            });
+  // Function to create a project from a qualified inquiry
+  const handleCreateProject = async (
+    inquiry: Inquiry
+  ) => {
+    try {
+      await createProject({
+        title: `${
+          inquiry.businessName || inquiry.clientName
+        } Project`,
+        description: inquiry.message,
+        clientName: inquiry.clientName,
+        clientEmail: inquiry.email,
+        stage: "planning",
+        inquiryId: inquiry._id,
+      });
 
-            alert("Project created successfully.");
-        } catch {
-            setError("Unable to create project.");
-        }
-    };
-    const handleStatusChange = async (
-        id: string,
-        status: Inquiry["status"]
-    ) => {
-        try {
-            const updatedInquiry = await updateInquiry(id, { status });
+      alert("Project created successfully.");
+    } catch {
+      setError("Unable to create project.");
+    }
+  };
 
-            setInquiries((prevInquiries) =>
-                prevInquiries.map((inquiry) =>
-                    inquiry._id === id ? updatedInquiry : inquiry
-                )
-            );
-        } catch {
-            setError("Unable to update inquiry status.");
-        }
-    };
+  // Function to update inquiry status
+  const handleStatusChange = async (
+    id: string,
+    status: Inquiry["status"]
+  ) => {
+    try {
+      await editItem(id, { status });
+    } catch {
+      setError("Unable to update inquiry status.");
+    }
+  };
 
-    // useEffect hook to fetch inquiries from the API when the component mounts. It calls the getInquiries service function, updates the state with the retrieved inquiries, and handles any errors that may occur during the fetch process.
-    useEffect(() => {
-        const fetchInquiries = async () => {
-            try {
-                const data = await getInquiries();
-                setInquiries(data);
-            } catch (error) {
-                setError("Unable to load inquiries.");
-            } finally {
-                setIsLoading(false);
-            }
-        };
+  // Function to delete an inquiry
+  const handleDeleteInquiry = async (
+    id: string
+  ) => {
+    try {
+      await removeItem(id);
+    } catch {
+      setError("Unable to delete inquiry.");
+    }
+  };
 
+  // Display loading message while inquiries are being fetched
+  if (isLoading) return <p>Loading inquiries...</p>;
 
-        // Call the fetchInquiries function to initiate the API call when the component mounts
-        fetchInquiries();
-    }, []);
+  // Display error message if something went wrong
+  if (error) return <p>{error}</p>;
 
-    // Conditional rendering based on the loading state and error state. If the data is still loading, it displays a loading message. If there is an error, it displays the error message. Otherwise, it renders the list of inquiries.
-    if (isLoading) return <p>Loading inquiries...</p>;
+  // Render inquiries list
+  return (
+    <section>
+      <h1>Client Inquiries</h1>
 
-    // If there is an error, display the error message
-    if (error) return <p>{error}</p>;
+      {inquiries.length === 0 ? (
+        <p>No inquiries yet.</p>
+      ) : (
+        <ul>
+          {inquiries.map((inquiry) => (
+            <li key={inquiry._id}>
+              <h2>{inquiry.clientName}</h2>
 
-    // Render the list of inquiries. If there are no inquiries, it displays a message indicating that there are no inquiries yet. Otherwise, it maps over the inquiries and displays relevant information for each inquiry, such as the client's name, business name, project type, status, and message.
-    return (
-        <section>
-            <h1>Client Inquiries</h1>
+              <p>
+                <strong>Business:</strong>{" "}
+                {inquiry.businessName}
+              </p>
 
-            {inquiries.length === 0 ? (
-                <p>No inquiries yet.</p>
-            ) : (
-                <ul>
-                    {inquiries.map((inquiry) => (
-                        <li key={inquiry._id}>
-                            <h2>{inquiry.clientName}</h2>
-                            <p>{inquiry.businessName}</p>
-                            <p>{inquiry.projectType}</p>
-                            <p>{inquiry.status}</p>
-                            <p>{inquiry.message}</p>
-                            <select
-                                value={inquiry.status}
-                                onChange={(event) =>
-                                    handleStatusChange(
-                                        inquiry._id,
-                                        event.target.value as Inquiry["status"]
-                                    )
+              <p>
+                <strong>Project Type:</strong>{" "}
+                {inquiry.projectType}
+              </p>
 
-                                }
+              <p>
+                <strong>Email:</strong>{" "}
+                {inquiry.email}
+              </p>
 
+              <p>
+                <strong>Message:</strong>{" "}
+                {inquiry.message}
+              </p>
 
-                            >
-                                <option value="new">New</option>
-                                <option value="discussion">Discussion</option>
-                                <option value="qualified">Qualified</option>
-                                <option value="closed">Closed</option>
-                            </select>
+              {/* Status dropdown for updating inquiry status */}
+              <select
+                value={inquiry.status}
+                onChange={(event) =>
+                  handleStatusChange(
+                    inquiry._id,
+                    event.target.value as Inquiry["status"]
+                  )
+                }
+              >
+                <option value="new">New</option>
+                <option value="discussion">
+                  Discussion
+                </option>
+                <option value="qualified">
+                  Qualified
+                </option>
+                <option value="closed">
+                  Closed
+                </option>
+              </select>
 
-                            {/* // If the inquiry status is "qualified", show a button to create a project from this inquiry. This allows the admin to easily convert qualified inquiries into active projects in the system. */}
-                            {inquiry.status === "qualified" && (
-                                <button type="button"
-                                    onClick={() => handleCreateProject(inquiry)}
-                                >
-                                    Create Project
-                                </button>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </section>
-    );
+              {/* Only show Create Project button when inquiry is qualified */}
+              {inquiry.status === "qualified" && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleCreateProject(inquiry)
+                  }
+                >
+                  Create Project
+                </button>
+              )}
+
+              {/* Delete inquiry */}
+              <button
+                type="button"
+                onClick={() =>
+                  handleDeleteInquiry(inquiry._id)
+                }
+              >
+                Delete Inquiry
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
 };
 
-// Export the InquiriesPage component as the default export of this module, allowing it to be imported and used in other parts of the application, such as in the routing configuration for the admin dashboard.
+// Export component
 export default InquiriesPage;
