@@ -1,7 +1,7 @@
 // Import necessary hooks and utilities from React and other libraries
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import apiClient from "../api/apiClients";
+import apiClient from "../api/apiClient";
 import { useAuth } from "../context/AuthContext";
 
 // AdminLoginPage component to handle admin login functionality

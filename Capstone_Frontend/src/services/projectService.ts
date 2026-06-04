@@ -1,5 +1,5 @@
 // Importing necessary modules and types for the project service functions, including the API client for making HTTP requests and the Project type definition for type checking.
-import apiClient from "../api/apiClient";
+import apiClient from "../api/apiClient"; 
 import type { Project } from "../types/Project";
 
 // Function to fetch all projects from the API. It sends a GET request to the "/projects" endpoint and returns the data as an array of Project objects.

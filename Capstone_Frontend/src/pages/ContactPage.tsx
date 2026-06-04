@@ -1,5 +1,5 @@
 import { useState } from "react";
-import apiClient from "../api/apiClients";
+import apiClient from "../api/apiClient";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({

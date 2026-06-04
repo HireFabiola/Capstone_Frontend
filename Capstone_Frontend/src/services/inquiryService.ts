@@ -1,4 +1,4 @@
-import apiClient from "../api/apiClients";
+import apiClient from "../api/apiClient";
 import type { Inquiry } from "../types/Inquiry";
 
 // GET all inquiries
