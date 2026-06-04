@@ -1,14 +1,14 @@
-// Import the configured API client for making HTTP requests to the backend API
-import apiClient from "../api/apiClients";
+// Importing necessary modules and types for the project service functions, including the API client for making HTTP requests and the Project type definition for type checking.
+import apiClient from "../api/apiClient";
 import type { Project } from "../types/Project";
 
-// Function to fetch all projects from the API. It makes a GET request to the "/projects" endpoint and returns the data as an array of Project objects.
+// Function to fetch all projects from the API. It sends a GET request to the "/projects" endpoint and returns the data as an array of Project objects.
 export const getProjects = async (): Promise<Project[]> => {
   const response = await apiClient.get<Project[]>("/projects");
   return response.data;
 };
 
-// Function to create a new project by sending a POST request to the API with the project data. It takes a Partial<Project> object as input, which allows for flexibility in the fields that can be included when creating a project. The function returns the created Project object as returned by the API.
+// Function to fetch a single project by its ID from the API. It sends a GET request to the "/projects/{id}" endpoint and returns the data as a Project object.
 export const createProject = async (
   projectData: Partial<Project>
 ): Promise<Project> => {
@@ -20,8 +20,24 @@ export const createProject = async (
   return response.data;
 };
 
-// Function to update an existing project by sending a PUT request to the API with the updated project data. It takes the project ID and a Partial<Project> object as input, which allows for flexibility in the fields that can be updated. The function returns the updated Project object as returned by the API.
+// Function to update an existing project by its ID. It takes the project ID and a partial object containing the fields to be updated, sends a PUT request to the "/projects/{id}" endpoint, and returns the updated Project object.
+export const updateProject = async (
+  id: string,
+  updates: Partial<Project>
+): Promise<Project> => {
+  const response = await apiClient.put<Project>(
+    `/projects/${id}`,
+    updates
+  );
+
+  return response.data;
+};
+
+// Function to delete a project by its ID. It sends a DELETE request to the "/projects/{id}" endpoint and returns the response data, which may contain a success message or the deleted project information.
 export const deleteProject = async (id: string) => {
-  const response = await apiClient.delete(`/projects/${id}`);
+  const response = await apiClient.delete(
+    `/projects/${id}`
+  );
+
   return response.data;
 };
