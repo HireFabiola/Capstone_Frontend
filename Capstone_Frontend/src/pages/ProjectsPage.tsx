@@ -3,28 +3,24 @@ import { useEffect, useState } from "react";
 import { getProjects } from "../services/projectService";
 import type { Project } from "../types/Project";
 import { createTask } from "../services/taskService";
+import { useCrud } from "../hooks/useCrud";
 
 // ProjectsPage component to display a list of projects in the admin dashboard
 const ProjectsPage = () => {
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
-
-    // useEffect hook to fetch projects from the API when the component mounts. It calls the getProjects service function, updates the state with the retrieved projects, and handles any errors that may occur during the fetch process.
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const data = await getProjects();
-                setProjects(data);
-            } catch {
-                setError("Unable to load projects.");
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchProjects();
-    }, []);
+  const {
+  items: projects,
+  isLoading,
+  error,
+  setError,
+  addItem,
+  editItem,
+  removeItem,
+} = useCrud<Project>({
+  getItems: getProjects,
+  createItem: createProject,
+  updateItem: updateProject,
+  deleteItem: deleteProject,
+});
 
     if (isLoading) return <p>Loading projects...</p>;
     if (error) return <p>{error}</p>;
