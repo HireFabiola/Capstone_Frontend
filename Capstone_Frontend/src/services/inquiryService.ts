@@ -25,3 +25,14 @@ export const updateInquiry = async (
 
   return response.data;
 };
+
+// DELETE an inquiry by ID
+export const deleteInquiry = async (
+  id: string
+) => {
+  const response = await apiClient.delete(
+    `/inquiries/${id}`
+  );
+
+  return response.data;
+};
