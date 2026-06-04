@@ -1,7 +1,9 @@
 //Import necessary hooks and services
 import { useEffect, useState } from "react";
-import { getInquiries } from "../services/inquiryService";
 import type { Inquiry } from "../types/Inquiry";
+import { getInquiries, updateInquiry } from "../services/inquiryService";
+
+
 
 // InquiriesPage component to display a list of client inquiries in the admin dashboard
 const InquiriesPage = () => {
@@ -9,6 +11,23 @@ const InquiriesPage = () => {
     const [inquiries, setInquiries] = useState<Inquiry[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const handleStatusChange = async (
+    id: string,
+    status: Inquiry["status"]
+) => {
+    try {
+        const updatedInquiry = await updateInquiry(id, { status });
+
+        setInquiries((prevInquiries) =>
+            prevInquiries.map((inquiry) =>
+                inquiry._id === id ? updatedInquiry : inquiry
+            )
+        );
+    } catch {
+        setError("Unable to update inquiry status.");
+    }
+};
 
     // useEffect hook to fetch inquiries from the API when the component mounts. It calls the getInquiries service function, updates the state with the retrieved inquiries, and handles any errors that may occur during the fetch process.
     useEffect(() => {
@@ -50,6 +69,20 @@ const InquiriesPage = () => {
                             <p>{inquiry.projectType}</p>
                             <p>{inquiry.status}</p>
                             <p>{inquiry.message}</p>
+                            <select
+                                value={inquiry.status}
+                                onChange={(event) =>
+                                    handleStatusChange(
+                                        inquiry._id,
+                                        event.target.value as Inquiry["status"]
+                                    )
+                                }
+                            >
+                                <option value="new">New</option>
+                                <option value="discussion">Discussion</option>
+                                <option value="qualified">Qualified</option>
+                                <option value="closed">Closed</option>
+                            </select>
                         </li>
                     ))}
                 </ul>
