@@ -20,3 +20,8 @@ export const createProject = async (
   return response.data;
 };
 
+// Function to update an existing project by sending a PUT request to the API with the updated project data. It takes the project ID and a Partial<Project> object as input, which allows for flexibility in the fields that can be updated. The function returns the updated Project object as returned by the API.
+export const deleteProject = async (id: string) => {
+  const response = await apiClient.delete(`/projects/${id}`);
+  return response.data;
+};
