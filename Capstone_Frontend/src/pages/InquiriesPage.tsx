@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { Inquiry } from "../types/Inquiry";
 import { getInquiries, updateInquiry } from "../services/inquiryService";
-
+import { createProject } from "../services/projectService";
 
 
 // InquiriesPage component to display a list of client inquiries in the admin dashboard
@@ -12,6 +12,22 @@ const InquiriesPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
+    const handleCreateProject = async (inquiry: Inquiry) => {
+        try {
+            await createProject({
+                title: `${inquiry.businessName || inquiry.clientName} Project`,
+                description: inquiry.message,
+                clientName: inquiry.clientName,
+                clientEmail: inquiry.email,
+                stage: "planning",
+                inquiryId: inquiry._id,
+            });
+
+            alert("Project created successfully.");
+        } catch {
+            setError("Unable to create project.");
+        }
+    };
     const handleStatusChange = async (
         id: string,
         status: Inquiry["status"]
@@ -87,7 +103,7 @@ const InquiriesPage = () => {
                                 <option value="closed">Closed</option>
                             </select>
 
-                             {/* // If the inquiry status is "qualified", show a button to create a project from this inquiry. This allows the admin to easily convert qualified inquiries into active projects in the system. */}
+                            {/* // If the inquiry status is "qualified", show a button to create a project from this inquiry. This allows the admin to easily convert qualified inquiries into active projects in the system. */}
                             {inquiry.status === "qualified" && (
                                 <button type="button"
                                     onClick={() => handleCreateProject(inquiry)}
