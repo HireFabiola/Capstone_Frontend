@@ -86,7 +86,7 @@ const AdminLayout = () => {
                     <img
                         src="/images/r4b-logo-dark.png"
                         alt="R4B Design Studio"
-                        className="h-56 w-56 object-contain brightness-0 invert -mb-8"
+                        // className="h-56 w-56 object-contain brightness-0 invert -mb-8"
                     />
 
                     <div className="flex items-center justify-center">
