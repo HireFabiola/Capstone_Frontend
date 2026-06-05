@@ -61,14 +61,17 @@
 
 .hero-bg-image {
   position: absolute;
-  right: 0;
+  top: 0;
+  right: -90px;
   bottom: 0;
-  width: 66%;
+  width: 78%;
   height: 100%;
   object-fit: cover;
   object-position: center right;
   z-index: 1;
+  pointer-events: none;
 }
+
 .navbar {
   position: relative;
   z-index: 3;
@@ -890,10 +893,12 @@
 
 .contact-layout {
   width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
   padding: 3rem 4rem;
   display: grid;
-  grid-template-columns: 0.9fr 1.15fr;
-  gap: 3rem;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem;
   align-items: center;
 }
 
