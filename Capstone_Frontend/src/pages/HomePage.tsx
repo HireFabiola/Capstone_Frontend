@@ -1,6 +1,7 @@
 import "../App.css";
 import { Link } from "react-router-dom"
 import "bootstrap-icons/font/bootstrap-icons.css";
+import DesignAssistant from "../components/DesignAssistant";
 
 type FeatureProps = {
     icon: string;
@@ -149,6 +150,7 @@ export default function HomePage() {
                     <Link to="/admin/login" className="login-link">🔒 Admin Login</Link>
                 </div>
             </footer>
+            <DesignAssistant />
         </main>
     );
 }
