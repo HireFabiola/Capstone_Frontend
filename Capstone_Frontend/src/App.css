@@ -51,17 +51,16 @@
   min-height: 760px;
   padding: 2rem 4rem;
   overflow: hidden;
-  background: linear-gradient(
-    90deg,
-    #f4e5da 0%,
-    #f6e8dd 45%,
-    #efd8c9 100%
-  );
+  background: linear-gradient(90deg,
+      #f4e5da 0%,
+      #f6e8dd 45%,
+      #efd8c9 100%);
 }
 
 .hero-bg-image {
   position: absolute;
   top: 0;
+  background-repeat: no-repeat;
   right: -90px;
   bottom: 0;
   width: 78%;
@@ -89,6 +88,7 @@
 .brand img {
   width: 220px !important;
 }
+
 .brand-divider {
   width: 1px;
   height: 70px;
@@ -130,6 +130,7 @@
   margin-top: 4rem;
   padding-left: 2rem;
 }
+
 .hero-content h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(4rem, 4.5vw, 5rem);
@@ -289,36 +290,34 @@
 }
 
 @media (max-width: 700px) {
-.hero {
-  position: relative;
-  min-height: 760px;
-  padding: 2rem 4rem;
-  overflow: hidden;
-  background-size: cover;
-  background-position: right center;
-  background-repeat: no-repeat;
-}
+  .hero {
+    position: relative;
+    min-height: 760px;
+    padding: 2rem 4rem;
+    overflow: hidden;
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+  }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(244, 229, 218, 0.96) 0%,
-    rgba(244, 229, 218, 0.9) 22%,
-    rgba(244, 229, 218, 0.58) 43%,
-    rgba(244, 229, 218, 0.18) 62%,
-    rgba(244, 229, 218, 0) 78%
-  );
-  z-index: 2;
-}
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        rgba(244, 229, 218, 0.96) 0%,
+        rgba(244, 229, 218, 0.9) 22%,
+        rgba(244, 229, 218, 0.58) 43%,
+        rgba(244, 229, 218, 0.18) 62%,
+        rgba(244, 229, 218, 0) 78%);
+    z-index: 2;
+  }
 
-.navbar,
-.hero-content {
-  position: relative;
-  z-index: 3;
-}
+  .navbar,
+  .hero-content {
+    position: relative;
+    z-index: 3;
+  }
 
   .brand p {
     font-size: 1rem;
@@ -433,6 +432,7 @@
 }
 
 @media (max-width: 700px) {
+
   .contact-hero,
   .contact-section {
     padding-left: 1.5rem;
@@ -474,10 +474,8 @@
   padding: 2rem;
 
   background:
-    linear-gradient(
-      rgba(255, 247, 240, 0.75),
-      rgba(255, 247, 240, 0.75)
-    ),
+    linear-gradient(rgba(255, 247, 240, 0.75),
+      rgba(255, 247, 240, 0.75)),
     url("/images/r4b-hero.png");
 
   background-size: cover;
@@ -879,6 +877,7 @@
   transform: translateY(-3px);
   transition: all 0.25s ease;
 }
+
 /* ==========================
    CONTACT PAGE FIX
 ========================== */
