@@ -78,9 +78,8 @@
 }
 
 .brand img {
-  width: 125px;
+  width: 220px !important;
 }
-
 .brand-divider {
   width: 1px;
   height: 70px;
@@ -312,10 +311,6 @@
   z-index: 3;
 }
 
-  .brand img {
-    width: 85px;
-  }
-
   .brand p {
     font-size: 1rem;
     letter-spacing: 0.3rem;
@@ -342,3 +337,4 @@
     border-right: none;
   }
 }
+

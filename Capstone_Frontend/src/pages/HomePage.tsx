@@ -1,5 +1,6 @@
 import "../App.css";
 
+
 type FeatureProps = {
   icon: string;
   title: string;
@@ -34,7 +35,7 @@ export default function HomePage() {
 
         <nav className="navbar">
           <div className="brand">
-            <img src="/images/r4b-logo.png" alt="R4B Design Studio" />
+            <img src="../../src/assets/r4b-logo.png" alt="R4B Design Studio" />
             <div className="brand-divider"></div>
             <p>
               <span>DESIGN</span> STUDIO
@@ -93,7 +94,7 @@ export default function HomePage() {
 
       <footer className="footer">
         <div className="footer-brand">
-          <img src="/images/r4b-logo-light.png" alt="R4B Design Studio" />
+          <img src="../s" alt="R4B Design Studio" />
           <h3>DESIGN STUDIO</h3>
           <p>
             Helping small businesses improve client experience, simplify
