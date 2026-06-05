@@ -53,7 +53,7 @@ export default function HomePage() {
         </nav>
 
         <div className="hero-content">
-          <h1>Growing your business with clarity and purpose.</h1>
+          <h1>Growing your business <br/>with clarity and purpose.</h1>
           <div className="gold-line"></div>
           <p>
             Thoughtful design, practical systems, and digital tools that help
