@@ -84,7 +84,7 @@ const AdminLayout = () => {
                 {/* Branding */}
                 <div className="mb-8 flex flex-col items-center">
                     <img
-                        src={logo}
+                        src="/images/r4b-logo-dark.png"
                         alt="R4B Design Studio"
                         className="h-56 w-56 object-contain brightness-0 invert -mb-8"
                     />
