@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import logo from "../assets/r4b-logo-dark.png";
+
 
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,9 +25,8 @@ const AdminLayout = () => {
             <header className="border-b border-[#1C3431] bg-[#122321] px-4 py-3 xl:hidden">
                 <div className="relative flex flex-col items-center justify-center">
                     <img
-                        src={logo}
-                        alt="R4B Design Studio"
-                        className="h-56 w-56 object-contain brightness-0 invert"
+                        src="/images/r4b-logo-dark.png"
+                        alt="R4B Design Studio" className="h-56 w-56 object-contain brightness-0 invert"
                     />
 
                     <div className="-mt-3 flex items-center justify-center">
