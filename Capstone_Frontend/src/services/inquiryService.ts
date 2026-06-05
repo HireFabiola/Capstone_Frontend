@@ -13,6 +13,27 @@ export const getInquiries = async (): Promise<
     return response.data;
 }; 
 
+export type CreateInquiry = {
+  clientName: string;
+  email: string;
+  businessName?: string;
+  projectType: string;
+  message: string;
+  budgetRange: string;
+};
+
+export const createInquiry = async (
+  inquiryData: CreateInquiry
+): Promise<Inquiry> => {
+  const response = await apiClient.post<Inquiry>(
+    "/inquiries",
+    inquiryData
+  );
+
+  return response.data;
+};
+
+
 // GET a single inquiry by ID
 export const updateInquiry = async (
   id: string,

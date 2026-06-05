@@ -1,157 +1,243 @@
 import { useState } from "react";
-import { useForm } from "../hooks/useForm";
-import apiClient from "../api/apiClient";
+import { createInquiry } from "../services/inquiryService";
+import "../App.css";
 
-const ContactPage = () => {
-const {
-  formData,
-  handleChange,
-  resetForm,
-} = useForm({
+type InquiryForm = {
+  clientName: string;
+  email: string;
+  businessName: string;
+  projectType: string;
+  budgetRange: string;
+  message: string;
+};
+
+const initialForm: InquiryForm = {
   clientName: "",
   email: "",
   businessName: "",
-  projectType: "website",
-  budgetRange: "not sure",
+  projectType: "",
+  budgetRange: "",
   message: "",
-});
+};
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
+  function handleChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) {
+    const { name, value } = e.target;
 
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault();
 
     setIsSubmitting(true);
-    setSuccessMessage("");
-    setErrorMessage("");
 
     try {
-      await apiClient.post("/inquiries", formData);
+      await createInquiry(formData);
 
-      setSuccessMessage(
-        "Thank you! Your inquiry has been submitted."
-      );
-
-    resetForm();
-    } catch {
-      setErrorMessage(
-        "Something went wrong. Please try again."
-      );
+      setFormData(initialForm);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to submit inquiry:", error);
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }
 
   return (
-    <section>
-      <h1>Contact R4B Design Studio</h1>
+    <main className="contact-page">
+      <section className="contact-layout">
+        <div className="contact-intro">
+          <p className="contact-eyebrow">LET'S CONNECT</p>
 
-      <p>
-        Tell me a little about your project, workflow challenge,
-        or digital idea.
-      </p>
+          <h1>
+            Let's start the
+            <br />
+            conversation.
+          </h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="clientName">Name</label>
-          <input
-            id="clientName"
-            name="clientName"
-            type="text"
-            value={formData.clientName}
-            onChange={handleChange}
-            required
-          />
+          <p className="contact-description">
+            Tell us a little about your project and we'll be in touch soon.
+          </p>
+
+          <div className="contact-details-card">
+            <h2>R4B Design Studio</h2>
+            <p>✉ hello@r4bdesignstudio.com</p>
+            <p>☎ (864) 555-0148</p>
+            <p>⌖ Greenville, SC</p>
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form
+          className="contact-form compact-contact-form"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-row">
+            <label>
+              Name
+              <input
+                type="text"
+                name="clientName"
+                value={formData.clientName}
+                onChange={handleChange}
+                required
+              />
+            </label>
 
-        <div>
-          <label htmlFor="businessName">Business Name</label>
-          <input
-            id="businessName"
-            name="businessName"
-            type="text"
-            value={formData.businessName}
-            onChange={handleChange}
-          />
-        </div>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
 
-        <div>
-          <label htmlFor="projectType">Project Type</label>
-          <select
-            id="projectType"
-            name="projectType"
-            value={formData.projectType}
-            onChange={handleChange}
-            required
+          <div className="form-row">
+            <label>
+              Business Name
+              <input
+                type="text"
+                name="businessName"
+                value={formData.businessName}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+              Project Type
+              <select
+                name="projectType"
+                value={formData.projectType}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select One</option>
+
+                <option value="website">
+                  Website Design & Development
+                </option>
+
+                <option value="business system">
+                  Business System
+                </option>
+
+                <option value="digital solution">
+                  Digital Solution
+                </option>
+
+                <option value="debugging">
+                  Debugging / Technical Support
+                </option>
+
+                <option value="not sure">
+                  Not Sure Yet
+                </option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Budget Range
+            <select
+              name="budgetRange"
+              value={formData.budgetRange}
+              onChange={handleChange}
+            >
+              <option value="">Select Budget</option>
+
+              <option value="under $500">
+                Under $500
+              </option>
+
+              <option value="$500-$1,000">
+                $500 - $1,000
+              </option>
+
+              <option value="$1,000-$2,500">
+                $1,000 - $2,500
+              </option>
+
+              <option value="$2,500+">
+                $2,500+
+              </option>
+
+              <option value="not sure">
+                Not Sure Yet
+              </option>
+            </select>
+          </label>
+
+          <label>
+            Project Details
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={4}
+              required
+            />
+          </label>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
           >
-            <option value="website">Website</option>
-            <option value="business system">
-              Business System
-            </option>
-            <option value="digital solution">
-              Digital Solution
-            </option>
-            <option value="debugging">Debugging</option>
-            <option value="not sure">Not Sure</option>
-          </select>
+            {isSubmitting
+              ? "SENDING..."
+              : "SEND INQUIRY →"}
+          </button>
+        </form>
+      </section>
+
+      {success && (
+        <div className="thank-you-overlay">
+          <div className="thank-you-modal">
+            <button
+              type="button"
+              className="modal-close"
+              onClick={() => setSuccess(false)}
+            >
+              ×
+            </button>
+
+            <p className="contact-eyebrow">
+              INQUIRY SENT
+            </p>
+
+            <h2>Thank You!</h2>
+
+            <p>
+              Your inquiry has been received. We'll
+              review your project details and follow
+              up soon.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setSuccess(false)}
+            >
+              CLOSE
+            </button>
+          </div>
         </div>
-
-        <div>
-          <label htmlFor="budgetRange">Budget Range</label>
-          <select
-            id="budgetRange"
-            name="budgetRange"
-            value={formData.budgetRange}
-            onChange={handleChange}
-          >
-            <option value="under $500">Under $500</option>
-            <option value="$500-$1,000">$500-$1,000</option>
-            <option value="$1,000-$2,500">
-              $1,000-$2,500
-            </option>
-            <option value="$2,500+">$2,500+</option>
-            <option value="not sure">Not Sure</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="message">Project Message</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={6}
-          />
-        </div>
-
-        {successMessage && <p>{successMessage}</p>}
-        {errorMessage && <p>{errorMessage}</p>}
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit Inquiry"}
-        </button>
-      </form>
-    </section>
+      )}
+    </main>
   );
-};
-
-export default ContactPage;
+}

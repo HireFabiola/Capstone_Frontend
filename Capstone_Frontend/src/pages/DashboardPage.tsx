@@ -110,53 +110,59 @@ const DashboardPage = () => {
       0
     );
 
-const projectStageData = {
-  labels: ["Planning", "Development", "Review", "Complete"],
-  datasets: [
-    {
-      data: [
-        projects.filter((project) => project.stage === "planning").length,
-        projects.filter((project) => project.stage === "development").length,
-        projects.filter((project) => project.stage === "review").length,
-        projects.filter((project) => project.stage === "complete").length,
-      ],
-      backgroundColor: ["#D69A2D", "#3F6F68", "#8C5E2A", "#122321"],
-      borderColor: "#FFF9F4",
-      borderWidth: 3,
-      hoverOffset: 10,
-    },
-  ],
-};
-const inquiryStatusData = {
-  labels: ["New", "Discussion", "Qualified", "Closed"],
-  datasets: [
-    {
-      data: [
-        inquiries.filter((inquiry) => inquiry.status === "new").length,
-        inquiries.filter((inquiry) => inquiry.status === "discussion").length,
-        inquiries.filter((inquiry) => inquiry.status === "qualified").length,
-        inquiries.filter((inquiry) => inquiry.status === "closed").length,
-      ],
-      backgroundColor: ["#D69A2D", "#3F6F68", "#C47A3A", "#122321"],
-      borderColor: "#FFF9F4",
-      borderWidth: 3,
-      hoverOffset: 10,
-    },
-  ],
-};
-const revenueData = {
-  labels: ["Potential / Pending", "Realized"],
-  datasets: [
-    {
-      label: "Estimated Revenue",
-      data: [potentialRevenue, realizedRevenue],
-      backgroundColor: ["#D69A2D", "#122321"],
-      borderColor: ["#B8862B", "#0F1C1B"],
-      borderWidth: 2,
-      borderRadius: 10,
-    },
-  ],
-};
+  const projectsInDevelopment = projects.filter(
+    (project) => project.stage === "development"
+  ).length;
+
+  const projectStageData = {
+    labels: ["Planning", "Development", "Review", "Complete"],
+    datasets: [
+      {
+        data: [
+          projects.filter((project) => project.stage === "planning").length,
+          projects.filter((project) => project.stage === "development").length,
+          projects.filter((project) => project.stage === "review").length,
+          projects.filter((project) => project.stage === "complete").length,
+        ],
+        backgroundColor: ["#D69A2D", "#3F6F68", "#8C5E2A", "#122321"],
+        borderColor: "#FFF9F4",
+        borderWidth: 3,
+        hoverOffset: 10,
+      },
+    ],
+  };
+  const inquiryStatusData = {
+    labels: ["New", "Discussion", "Qualified", "Closed"],
+    datasets: [
+      {
+        data: [
+          inquiries.filter((inquiry) => inquiry.status === "new").length,
+          inquiries.filter((inquiry) => inquiry.status === "discussion").length,
+          inquiries.filter((inquiry) => inquiry.status === "qualified").length,
+          inquiries.filter((inquiry) => inquiry.status === "closed").length,
+        ],
+        backgroundColor: ["#D69A2D", "#3F6F68", "#C47A3A", "#122321"],
+        borderColor: "#FFF9F4",
+        borderWidth: 3,
+        hoverOffset: 10,
+      },
+    ],
+  };
+  const revenueData = {
+    labels: ["Potential / Pending", "Realized"],
+    datasets: [
+      {
+        label: "Estimated Revenue",
+        data: [potentialRevenue, realizedRevenue],
+        backgroundColor: ["#D69A2D", "#122321"],
+        borderColor: ["#B8862B", "#0F1C1B"],
+        borderWidth: 2,
+        borderRadius: 10,
+      },
+    ],
+  };
+
+  
   return (
     <section className="space-y-6">
       <div>
@@ -203,75 +209,122 @@ const revenueData = {
         </Link>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-3">
-     <section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
-          <h2 className="mb-4 text-xl font-bold text-[#122321]">
-            Recent Inquiries
-          </h2>
+  <div className="grid gap-6 xl:grid-cols-4">
+  <section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm xl:col-span-2">
+    <h2 className="mb-4 text-xl font-bold text-[#122321]">
+      Recent Inquiries
+    </h2>
 
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-              <thead className="border-b border-[#D8C6B5] text-xs uppercase text-stone-500">
-                <tr>
-                  <th className="py-3">Client</th>
-                  <th className="py-3">Need</th>
-                  <th className="py-3">Budget</th>
-                  
-                  <th className="py-3">Status</th>
-                </tr>
-              </thead>
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-left text-sm">
+        <thead className="border-b border-[#D8C6B5] text-xs uppercase text-stone-500">
+          <tr>
+            <th className="py-3">Client</th>
+            <th className="py-3">Need</th>
+            <th className="py-3">Budget</th>
+            <th className="py-3">Status</th>
+          </tr>
+        </thead>
 
-              <tbody>
-                {inquiries.slice(0, 5).map((inquiry) => (
-                  <tr key={inquiry._id} className="border-b border-[#ead8c6] last:border-0">
-                    <td className="py-3 font-medium text-[#122321]">
-                      {inquiry.clientName}
-                    </td>
+        <tbody>
+          {inquiries.slice(0, 5).map((inquiry) => (
+            <tr
+              key={inquiry._id}
+              className="border-b border-[#ead8c6] last:border-0"
+            >
+              <td className="py-3 font-medium text-[#122321]">
+                {inquiry.clientName}
+              </td>
 
-                    <td className="py-3 text-stone-600">
-                      {inquiry.projectType}
-                    </td>
+              <td className="py-3 text-stone-600">
+                {inquiry.projectType}
+              </td>
 
-                    <td className="py-3 text-stone-600">
-                      {inquiry.budgetRange}
-                    </td>
+              <td className="py-3 text-stone-600">
+                {inquiry.budgetRange}
+              </td>
 
-                    <td className="py-3">
-                      <span className="rounded-full bg-[#D69A2D]/15 px-3 py-1 text-xs font-medium text-[#9b6a16]">
-                        {inquiry.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              <td className="py-3">
+                <span className="rounded-full bg-[#D69A2D]/15 px-3 py-1 text-xs font-medium text-[#9b6a16]">
+                  {inquiry.status}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
+    <h2 className="mb-4 text-xl font-bold text-[#122321]">
+      Open Tasks
+    </h2>
+
+    <div className="space-y-4">
+      {tasks.filter((task) => task.status !== "complete").length === 0 ? (
+        <p className="text-sm text-stone-500">No open tasks.</p>
+      ) : (
+        tasks
+          .filter((task) => task.status !== "complete")
+          .slice(0, 5)
+          .map((task) => (
+            <div
+              key={task._id}
+              className="border-b border-[#ead8c6] pb-3 last:border-0"
+            >
+              <p className="font-medium text-[#122321]">
+                {task.title}
+              </p>
+
+              <p className="text-sm text-stone-500">
+                {task.status}
+              </p>
+            </div>
+          ))
+      )}
+    </div>
+  </section>
+
+  <Link
+    to="/admin/projects"
+    className="block rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  >
+    <h2 className="mb-4 text-xl font-bold text-[#122321]">
+      Projects in Development
+    </h2>
+
+    <p className="text-4xl font-bold text-[#122321]">
+      {projectsInDevelopment}
+    </p>
+
+    <p className="mt-2 text-sm text-stone-600">
+      Currently in the build phase
+    </p>
+
+    <div className="mt-6 space-y-3">
+      {projects
+        .filter((project) => project.stage === "development")
+        .slice(0, 3)
+        .map((project) => (
+          <div
+            key={project._id}
+            className="border-b border-[#ead8c6] pb-2 last:border-0"
+          >
+            <p className="font-medium text-[#122321]">
+              {project.title}
+            </p>
+
+            <p className="text-sm text-stone-500">
+              {project.clientName}
+            </p>
           </div>
-        </section>
+        ))}
+    </div>
+  </Link>
+</div>
 
-<section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
-          <h2 className="mb-4 text-xl font-bold text-[#122321]">
-            Open Tasks
-          </h2>
-
-          <div className="space-y-4">
-            {tasks.filter((task) => task.status !== "complete").length === 0 ? (
-              <p className="text-sm text-stone-500">No open tasks.</p>
-            ) : (
-              tasks
-                .filter((task) => task.status !== "complete")
-                .slice(0, 5)
-                .map((task) => (
-                  <div key={task._id} className="border-b border-[#ead8c6] pb-3 last:border-0">
-                    <p className="font-medium text-[#122321]">{task.title}</p>
-                    <p className="text-sm text-stone-500">{task.status}</p>
-                  </div>
-                ))
-            )}
-          </div>
-        </section>
-      </div>
-
-<section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
+      <section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
         <h2 className="mb-4 text-xl font-bold text-[#122321]">
           Active Projects
         </h2>
@@ -308,48 +361,48 @@ const revenueData = {
           </table>
         </div>
       </section>
-<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-  <Link to="/admin/inquiries" className="block">
-    <DashboardChartCard title="Estimated Revenue Pipeline">
-      <Bar
-        data={revenueData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
-    </DashboardChartCard>
-  </Link>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <Link to="/admin/inquiries" className="block">
+          <DashboardChartCard title="Estimated Revenue Pipeline">
+            <Bar
+              data={revenueData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
+              }}
+            />
+          </DashboardChartCard>
+        </Link>
 
-  <Link to="/admin/projects" className="block">
-    <DashboardChartCard title="Project Phases">
-      <Pie
-        data={projectStageData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
-      />
-    </DashboardChartCard>
-  </Link>
+        <Link to="/admin/projects" className="block">
+          <DashboardChartCard title="Project Phases">
+            <Pie
+              data={projectStageData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+              }}
+            />
+          </DashboardChartCard>
+        </Link>
 
-  <Link to="/admin/inquiries" className="block">
-    <DashboardChartCard title="Inquiry Statuses">
-      <Pie
-        data={inquiryStatusData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
-      />
-    </DashboardChartCard>
-  </Link>
-</div>
+        <Link to="/admin/inquiries" className="block">
+          <DashboardChartCard title="Inquiry Statuses">
+            <Pie
+              data={inquiryStatusData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+              }}
+            />
+          </DashboardChartCard>
+        </Link>
+      </div>
     </section>
   );
 };
