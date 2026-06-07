@@ -74,6 +74,9 @@ const ProjectsPage = () => {
       } else {
         // Create new project
         const newProject = await addItem(formData);
+        if (!newProject) {
+          return;
+        }
         // Switch to edit mode for the newly created project
         setEditingProjectId(newProject._id);
       }
