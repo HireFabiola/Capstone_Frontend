@@ -837,10 +837,11 @@ main {
 ===================================================== */
 
 .design-assistant {
-  position: fixed;
+  position: absolute;
   right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 1000;
+  top: -40x;
+  transform: translateY(-50%);
+  z-index: 20;
 }
 
 .assistant-toggle {

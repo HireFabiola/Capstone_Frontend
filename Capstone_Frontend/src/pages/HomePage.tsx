@@ -107,6 +107,7 @@ export default function HomePage() {
                     title="THOUGHTFUL DESIGN"
                     description="Clean, intentional design that reflects your brand and builds trust."
                 />
+                <DesignAssistant />
             </section>
 
             <footer className="footer">
@@ -162,8 +163,9 @@ export default function HomePage() {
                     <p>⌖ Greenville, SC</p>
                     <Link to="/admin/login" className="login-link">🔒 Admin Login</Link>
                 </div>
+                
             </footer>
-            <DesignAssistant />
+           
         </main>
     );
 }
