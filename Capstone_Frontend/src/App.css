@@ -876,21 +876,25 @@ main {
 .typing-dots span:nth-child(3) {
   animation-delay: 0.3s;
 }
-
 .fab-typed-message {
   position: absolute;
   bottom: 88px;
   left: 50%;
   transform: translateX(-50%);
 
-  width: 210px;
+  width: 100px;
+  max-width: 100px;
+
   margin: 0;
 
   text-align: center;
   color: #102022;
   font-size: 0.95rem;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.5;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .fab-typed-message::after {
@@ -934,17 +938,6 @@ main {
 .fab-avatar:hover {
   transform: translateY(-3px);
   transition: all 0.25s ease;
-}
-.fab-typing-message {
-  position: absolute;
-  bottom: 88px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 180px;
-  text-align: center;
-  color: #102022;
-  font-size: 0.95rem;
-  font-weight: 600;
 }
 
 .typing-dots {
@@ -999,9 +992,70 @@ main {
   box-shadow: 0 20px 50px rgba(16, 32, 34, 0.22);
 }
 
+.assistant-header {
+  background: #102022;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.assistant-header h3 {
+  margin: 0;
+  color: #c98908;
+}
+
+.assistant-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+}
+
+.assistant-header button {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.assistant-body {
+  padding: 1rem;
+}
+
+.assistant-answer {
+  background: white;
+  border: 1px solid #eadbd0;
+  border-radius: 14px;
+  padding: 1rem;
+  line-height: 1.5;
+  color: #102022;
+}
+
+.assistant-questions {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.assistant-questions button {
+  background: transparent;
+  border: 1px solid #d8c6b5;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: #102022;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.assistant-questions button:hover {
+  background: #102022;
+  color: white;
+}
+
 /* ================================================
    PORTFOLIO TABLET
-===================================================== */ 
+===================================================== */ */
 
 @media (max-width: 900px) {
   .portfolio-grid {
