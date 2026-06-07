@@ -1122,7 +1122,7 @@ main {
   .hero {
     min-height: auto;
     padding: 1rem;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-position: center center;
   }
 
@@ -1132,6 +1132,14 @@ main {
     inset: 0;
     background: rgba(244, 229, 218, 0.88);
     z-index: 2;
+  }
+
+    .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 1;
   }
 
   .navbar {
