@@ -1,5 +1,6 @@
 import "../App.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import DesignAssistant from "../components/DesignAssistant";
 
@@ -16,6 +17,8 @@ type FooterColumnProps = {
 };
 
 export default function HomePage() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <main className="home-page">
             <section
@@ -45,13 +48,24 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div className="nav-links">
-                        <a className="active" href="/">Home</a>
-                        <a href="/about">About</a>
-                        <a href="/services">Services</a>
-                        <a href="/work">Work</a>
-                        <a href="/resources">Resources</a>
-                        <a href="/contact">Contact</a>
+                    <button
+                        className={`nav-toggle ${menuOpen ? "open" : ""}`}
+                        type="button"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle navigation"
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+
+                    <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+                        <a className="active" href="/" onClick={() => setMenuOpen(false)}>Home</a>
+                        <a href="/about" onClick={() => setMenuOpen(false)}>About</a>
+                        <a href="/services" onClick={() => setMenuOpen(false)}>Services</a>
+                        <a href="/work" onClick={() => setMenuOpen(false)}>Work</a>
+                        <a href="/resources" onClick={() => setMenuOpen(false)}>Resources</a>
+                        <a href="/contact" onClick={() => setMenuOpen(false)}>Contact</a>
                     </div>
                 </nav>
 

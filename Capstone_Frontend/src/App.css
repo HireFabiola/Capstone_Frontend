@@ -157,6 +157,10 @@ body {
   border-bottom: 3px solid #a56f08;
 }
 
+.nav-toggle {
+  display: none;
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -325,62 +329,202 @@ body {
 }
 
 @media (max-width: 700px) {
+
   .hero {
-    position: relative;
-    min-height: 700px;
-    padding: 2rem 4rem;
-    overflow: hidden;
-    background-size: cover;
-    background-position: right center;
-    background-repeat: no-repeat;
+    min-height: auto;
+    padding: 1rem;
+    background-position: center center;
   }
 
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg,
-        rgba(244, 229, 218, 0.96) 0%,
-        rgba(244, 229, 218, 0.9) 22%,
-        rgba(244, 229, 218, 0.58) 43%,
-        rgba(244, 229, 218, 0.18) 62%,
-        rgba(244, 229, 218, 0) 78%);
-    z-index: 2;
+  .navbar {
+    position: relative;
+    justify-content: center;
+    padding-top: 0.5rem;
   }
 
-  .navbar,
-  .hero-content {
-    position: relative;
-    z-index: 3;
+  .brand {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .brand img {
+    width: 110px;
+  }
+
+  .brand-divider {
+    height: 50px;
   }
 
   .brand p {
-    font-size: 1rem;
-    letter-spacing: 0.3rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.2rem;
   }
 
+  /* Hamburger */
+
+ .nav-toggle {
+  display: flex;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+
+  width: 44px;
+  height: 44px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  background: rgba(255, 247, 240, 0.95);
+  border: 1px solid #a56f08;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #102022;
+  border-radius: 999px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #102022;
+  border-radius: 999px;
+  transition: 0.25s ease;
+}
+
+/* Hamburger transforms into X when menu is open */
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 229, 218, 0.97) 0%,
+    rgba(244, 229, 218, 0.92) 35%,
+    rgba(244, 229, 218, 0.84) 65%,
+    rgba(244, 229, 218, 0.76) 100%
+  );
+  z-index: 2;
+}
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 3.5rem;
+    right: 0.5rem;
+
+    width: 180px;
+
+    background: rgba(255, 247, 240, 0.97);
+
+    border-radius: 12px;
+
+    padding: 1rem;
+
+    gap: 0.75rem;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  }
+
+  /* Hero Content */
+
   .hero-content {
+    width: 100%;
+    max-width: 100%;
+
+    text-align: center;
+
     padding-left: 0;
+
+    margin-top: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+
+  .gold-line {
+    margin: 1rem auto;
+  }
+
+  .hero-content p {
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .hero-buttons {
     flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .feature-strip,
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Feature Strip */
+
+  .feature-strip {
+    grid-template-columns: 1fr;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .feature-card {
+    border-right: none;
+    border-bottom: 1px solid #d8c6b5;
+
+    padding-bottom: 1rem;
+
+    justify-content: center;
+    text-align: center;
+  }
+
+  .feature-card:last-child {
+    border-bottom: none;
+  }
+
+  /* Footer */
+
   .footer {
     grid-template-columns: 1fr;
-    margin-left: 1rem;
-    margin-right: 1rem;
   }
 
-  .feature-card,
   .footer-brand,
   .footer-column {
     border-right: none;
+    text-align: center;
   }
 }
-
 .contact-page {
   background: #f4e5da;
   color: #102022;
