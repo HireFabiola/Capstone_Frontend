@@ -850,6 +850,74 @@ main {
   cursor: pointer;
 }
 
+.typing-dots {
+  position: absolute;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background: #102022;
+  border-radius: 50%;
+  animation: typingBounce 0.9s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.fab-typed-message {
+  position: absolute;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 210px;
+  margin: 0;
+
+  text-align: center;
+  color: #102022;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.fab-typed-message::after {
+  content: "|";
+  color: #a56f08;
+  animation: blinkCursor 0.75s step-end infinite;
+}
+
+@keyframes typingBounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  40% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes blinkCursor {
+  50% {
+    opacity: 0;
+  }
+}
 .fab-avatar {
   width: 70px;
   height: 70px;
@@ -867,7 +935,60 @@ main {
   transform: translateY(-3px);
   transition: all 0.25s ease;
 }
+.fab-typing-message {
+  position: absolute;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  text-align: center;
+  color: #102022;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
 
+.typing-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background: #102022;
+  border-radius: 50%;
+  animation: typingBounce 0.9s infinite ease-in-out;
+}
+
+.wave {
+  display: block;
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+  animation: waveHand 1s ease-in-out infinite;
+}
+
+.type-line {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  margin: 0 auto;
+  border-right: 2px solid #a56f08;
+}
+
+.line-one {
+  animation: typeLineOne 0.7s steps(7, end) 1s forwards;
+}
+
+.line-two {
+  animation: typeLineTwo 0.9s steps(9, end) 1.8s forwards;
+}
+
+.line-three {
+  animation: typeLineThree 1.2s steps(17, end) 2.8s forwards;
+}
 .assistant-window {
   width: 360px;
   margin-bottom: 1rem;
@@ -878,68 +999,9 @@ main {
   box-shadow: 0 20px 50px rgba(16, 32, 34, 0.22);
 }
 
-.assistant-header {
-  background: #102022;
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.assistant-header h3 {
-  margin: 0;
-  color: #c98908;
-}
-
-.assistant-header p {
-  margin: 0.25rem 0 0;
-  font-size: 0.85rem;
-}
-
-.assistant-header button {
-  background: transparent;
-  color: white;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.assistant-body {
-  padding: 1rem;
-}
-
-.assistant-answer {
-  background: white;
-  border: 1px solid #eadbd0;
-  border-radius: 14px;
-  padding: 1rem;
-  line-height: 1.5;
-}
-
-.assistant-questions {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 1rem;
-}
-
-.assistant-questions button {
-  background: transparent;
-  border: 1px solid #d8c6b5;
-  border-radius: 999px;
-  padding: 0.7rem 1rem;
-  color: #102022;
-  cursor: pointer;
-}
-
-.assistant-questions button:hover {
-  background: #102022;
-  color: white;
-}
-
-/* =====================================================
+/* ================================================
    PORTFOLIO TABLET
-===================================================== */
+===================================================== */ 
 
 @media (max-width: 900px) {
   .portfolio-grid {

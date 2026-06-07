@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 
 const faqs = [
@@ -31,9 +31,43 @@ const faqs = [
 
 export default function DesignAssistant() {
     const [isOpen, setIsOpen] = useState(false);
-     const [answer, setAnswer] = useState(
+
+const [showGreeting, setShowGreeting] = useState(false);
+const [showDots, setShowDots] = useState(false);
+const [typedMessage, setTypedMessage] = useState("");
+    
+const greetingMessage = "👋 Hello, I am your design assistant, here to answer questions!";
+
+const [answer, setAnswer] = useState(
         "Hi! I'm Fab 👩🏾‍💻. I'm here to answer questions about services, pricing, timelines, and how to get started with R4B Design Studio."
     );
+
+useEffect(() => {
+  const startTimer = setTimeout(() => {
+    setShowDots(true);
+  }, 3000);
+
+  const typingStartTimer = setTimeout(() => {
+    setShowDots(false);
+    setShowGreeting(true);
+
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      setTypedMessage(greetingMessage.slice(0, index + 1));
+      index++;
+
+      if (index === greetingMessage.length) {
+        clearInterval(typingInterval);
+      }
+    }, 65);
+  }, 5200);
+
+  return () => {
+    clearTimeout(startTimer);
+    clearTimeout(typingStartTimer);
+  };
+}, []);
 
     return (
         <div className="design-assistant">
@@ -65,6 +99,22 @@ export default function DesignAssistant() {
                     </div>
                 </div>
             )}
+
+ {!isOpen && showDots && (
+  <div className="typing-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+)}
+
+{!isOpen && showGreeting && (
+  <p className="fab-typed-message">
+    {typedMessage}
+  </p>
+)}
+
+
 
             <button
                 className="assistant-toggle"
