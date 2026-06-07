@@ -36,7 +36,7 @@ const [showGreeting, setShowGreeting] = useState(false);
 const [showDots, setShowDots] = useState(false);
 const [typedMessage, setTypedMessage] = useState("");
     
-const greetingMessage = "👋 Hello, I am your design assistant!";
+const greetingMessage = "👋 Hello, I am your design assistant; here to answer your questions!";
 
 const [answer, setAnswer] = useState(
         "Hi! I'm Fab 👩🏾‍💻. I'm here to answer questions about services, pricing, timelines, and how to get started with R4B Design Studio."
@@ -66,7 +66,7 @@ useEffect(() => {
   const hideGreetingTimer = setTimeout(() => {
     setShowGreeting(false);
     setTypedMessage("");
-  }, 13000);
+  }, 20000);
 
   return () => {
     clearTimeout(startTimer);
