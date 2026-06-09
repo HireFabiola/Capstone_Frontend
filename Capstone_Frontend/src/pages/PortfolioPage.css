@@ -34,11 +34,30 @@
   align-items: center;
 
   background: rgba(255, 250, 243, 0.97);
-  border-bottom: 1px solid rgba(234, 216, 195, 0.75);
+  border-bottom: none;
 
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   z-index: 20;
+}
+
+.portfolio-navbar::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+
+  height: 30px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 250, 243, 0.97),
+    rgba(255, 250, 243, 0)
+  );
+
+  pointer-events: none;
 }
 
 .portfolio-brand-lockup {
@@ -49,10 +68,11 @@
 }
 
 .portfolio-r4b-logo {
-  width: 95px;
-  height: 95px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
-  flex-shrink: 0;
+
+  transform: translateY(10px);
 }
 
 .portfolio-brand-divider {

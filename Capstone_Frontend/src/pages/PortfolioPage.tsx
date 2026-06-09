@@ -32,7 +32,7 @@ export default function PortfolioPage() {
   <div className="portfolio-nav-links">
     <a href="/">Home</a>
     <a href="#about">About</a>
-    <a href="#journey" className="active">Journey</a>
+    <a href="#journey" className="active">My Journey</a>
     <a href="#projects">Projects</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
