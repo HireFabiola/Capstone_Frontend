@@ -1,13 +1,15 @@
 // src/components/portfolio/JourneySection.tsx
 
+import { useState } from "react";
 import { phases, skillCards } from "./portfolioData";
 
 export default function JourneySection() {
+  const [openCard, setOpenCard] = useState<string | null>(null);
+
   return (
     <section id="journey" className="journey-section">
       <div className="section-heading">
         <h2>My Journey. My Growth. My Projects.</h2>
-
         <p>
           A step-by-step evolution of skills, knowledge, and real-world
           application.
@@ -15,7 +17,6 @@ export default function JourneySection() {
       </div>
 
       <div className="journey-grid">
-        {/* LEFT SIDE - PHASES */}
         <aside className="journey-phases">
           {phases.map((phase) => (
             <article className="phase-card" key={phase.phase}>
@@ -25,42 +26,67 @@ export default function JourneySection() {
 
               <div className="phase-content">
                 <span className="phase-label">{phase.phase}</span>
-
                 <h3>{phase.title}</h3>
-
                 <p>{phase.description}</p>
+
+                <div className="phase-tools">
+                  {phase.tools.map((tool) => (
+                    <span key={tool}>{tool}</span>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
         </aside>
 
-        {/* RIGHT SIDE - MILESTONE CARDS */}
         <div className="journey-skills">
-          {skillCards.map((skill) => (
-            <article className="skill-card" key={skill.title}>
-              <div className="skill-thumbnail">
-                <img src={skill.image} alt="" />
-              </div>
+          {skillCards.map((skill) => {
+            const isOpen = openCard === skill.title;
 
-              <div className="skill-card-content">
-                <h3>{skill.title}</h3>
-
-                <p className="skill-description">
-                  {skill.description}
-                </p>
-
-                <div className="skill-tags">
-                  {skill.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
+            return (
+              <article
+                className={`skill-card ${
+                  skill.visualType === "screenshot"
+                    ? "screenshot-card"
+                    : "icon-card"
+                }`}
+                key={skill.title}
+              >
+                <div
+                  className={`skill-thumbnail ${
+                    skill.visualType === "screenshot" ? "screenshot" : "icon"
+                  }`}
+                >
+                  <img src={skill.image} alt="" />
                 </div>
-              </div>
 
-              <span className="skill-link">
-                {skill.linkLabel} →
-              </span>
-            </article>
-          ))}
+                <div className="skill-card-content">
+                  <h3>{skill.title}</h3>
+
+                  <p className="skill-description">
+                    {skill.description}
+                  </p>
+
+                  <small
+                    className="skill-link"
+                    onClick={() =>
+                      setOpenCard(isOpen ? null : skill.title)
+                    }
+                  >
+                    {skill.linkLabel} {isOpen ? "▴" : "▾"}
+                  </small>
+
+                  {isOpen && skill.details && (
+                    <ul className="skill-details">
+                      {skill.details.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
