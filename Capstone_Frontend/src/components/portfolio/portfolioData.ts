@@ -79,6 +79,25 @@ export const skillCards = [
       "Designed with mobile-first thinking and responsive breakpoints.",
     ],
   },
+  {
+  title: "Design Systems & CSS Frameworks",
+  image: "/images/journey/design.png",
+  visualType: "banner",
+
+  description:
+    "Explored modern design-to-development workflows using Figma, Bootstrap, and Tailwind CSS to create responsive, user-focused interfaces.",
+
+  linkLabel: "Highlights",
+
+  details: [
+    "Created wireframes and high-fidelity mockups using Figma.",
+    "Built interactive prototypes to communicate user experiences and design intent.",
+    "Practiced designer-to-developer handoff workflows and collaboration techniques.",
+    "Implemented responsive layouts using Bootstrap's grid system and components.",
+    "Explored utility-first styling concepts with Tailwind CSS.",
+    "Customized framework styles to support branding and design requirements.",
+  ],
+},
 
   {
     title: "JavaScript & TypeScript Foundations",

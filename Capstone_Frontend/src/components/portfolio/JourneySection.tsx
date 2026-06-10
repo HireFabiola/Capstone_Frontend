@@ -45,17 +45,17 @@ export default function JourneySection() {
 
             return (
               <article
-                className={`skill-card ${
-                  skill.visualType === "screenshot"
-                    ? "screenshot-card"
-                    : "icon-card"
-                }`}
+                className={`skill-card ${skill.visualType === "banner"
+                    ? "banner-card"
+                    : skill.visualType === "screenshot"
+                      ? "screenshot-card"
+                      : "icon-card"
+                  }`}
                 key={skill.title}
               >
                 <div
-                  className={`skill-thumbnail ${
-                    skill.visualType === "screenshot" ? "screenshot" : "icon"
-                  }`}
+                  className={`skill-thumbnail ${skill.visualType === "screenshot" ? "screenshot" : "icon"
+                    }`}
                 >
                   <img src={skill.image} alt="" />
                 </div>
