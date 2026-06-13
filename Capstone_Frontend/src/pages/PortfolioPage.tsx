@@ -6,49 +6,48 @@ import JourneySection from "../components/portfolio/JourneySection.tsx";
 import ProjectsSection from "../components/portfolio/ProjectsSection.tsx";
 import CapstoneSection from "../components/portfolio/CapstoneSection.tsx";
 import PortfolioFooterQuote from "../components/portfolio/PortfolioFooterQuote.tsx";
-
+import ContactSection from "../components/portfolio/ContactSection.tsx";
 
 export default function PortfolioPage() {
   return (
 
 
     <div className="portfolio-page">
-       <nav className="portfolio-navbar">
-  <div className="portfolio-brand-lockup">
-    <img
-      src="/images/r4b-logo.png"
-      alt="R4B"
-      className="portfolio-r4b-logo"
-    />
+      <nav className="portfolio-navbar">
+        {/* <div className="portfolio-brand-lockup">
+          <img
+            src="/images/r4b-logo.png"
+            alt="R4B"
+            className="portfolio-r4b-logo"
+          />
 
-    <div className="portfolio-brand-divider" />
+          <div className="portfolio-brand-divider" />
 
-    <div className="portfolio-studio-text">
-      <span className="portfolio-design-text">Design</span>
-      <span className="portfolio-studio-word">Studio</span>
-    </div>
-  </div>
+          <div className="portfolio-studio-text">
+            <span className="portfolio-design-text">Design</span>
+            <span className="portfolio-studio-word">Studio</span>
+          </div>
+        </div> */}
 
-  <div className="portfolio-nav-links">
-    <a href="/">Home</a>
-    <a href="#about">About</a>
-    <a href="#journey" className="active">My Journey</a>
-    <a href="#projects">Projects</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </div>
+        <div className="portfolio-nav-links">
+          {/* <a href="/">Home</a> */}
+          {/* <a href="#about">About</a> */}
+          <a href="#journey" className="active">Welcome</a>
+          <a href="#projects">Projects</a>
+        </div>
 
-  <a href="#contact" className="portfolio-nav-cta">
-    Let&apos;s Connect
-  </a>
-</nav>
-
+        <a href="#contact" className="portfolio-nav-cta">
+          Let&apos;s Connect
+        </a>
+      </nav>
+      
       <PortfolioHero />
       <TimelineSummary />
       <JourneySection />
       <ProjectsSection />
       <CapstoneSection />
       <PortfolioFooterQuote />
+    <ContactSection />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 export default function CapstoneSection() {
   return (
-    <section className="capstone-section">
+    <section id="capstone" className="capstone-section">
 
       <div className="capstone-image">
         <img
@@ -14,7 +14,7 @@ export default function CapstoneSection() {
       <div className="capstone-content">
 
         <p className="section-eyebrow">
-          CAPSTONE PROJECT
+            FULL-STACK MERN CAPSTONE
         </p>
 
         <h2>R4B Design Studio</h2>

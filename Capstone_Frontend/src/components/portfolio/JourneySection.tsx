@@ -80,12 +80,18 @@ export default function JourneySection() {
               </div>
 
               <div className="skill-card-highlights">
-                <small
-                  className="skill-link"
-                  onClick={() => setOpenCard(isOpen ? null : skill.title)}
-                >
-                  {skill.linkLabel} {isOpen ? "▴" : "▾"}
-                </small>
+               {skill.phase === "Phase 06" ? (
+  <a href="#capstone" className="skill-link">
+    View Capstone →
+  </a>
+) : (
+  <small
+    className="skill-link"
+    onClick={() => setOpenCard(isOpen ? null : skill.title)}
+  >
+    {skill.linkLabel} {isOpen ? "▴" : "▾"}
+  </small>
+)}
 
                 {isOpen && (
                   <>
@@ -180,6 +186,8 @@ export default function JourneySection() {
           </div>
         </div>
       )}
+
+      
     </section>
   );
 }

@@ -12,13 +12,13 @@ export const phases = [
     description: "HTML, CSS, responsive layouts, and foundational UI design.",
     tools: ["HTML", "CSS", "Flexbox", "CSS Grid", "Accessibility"],
   },
-  {
-    phase: "Phase 03",
-    title: "JavaScript & TypeScript",
-    description:
-      "Core programming, DOM interaction, typed development, and frontend logic.",
-    tools: ["JavaScript", "TypeScript", "DOM", "Events"],
-  },
+ {
+  phase: "Phase 03",
+  title: "JavaScript & TypeScript",
+  description:
+    "Building interactivity, managing browser behavior, and introducing type-safe development through progressively more complex applications.",
+  tools: ["JavaScript", "DOM", "TypeScript", "ES6+", "Local Storage"],
+},
   {
     phase: "Phase 04",
     title: "React Development",
@@ -40,6 +40,7 @@ export const phases = [
     tools: ["MERN", "Deployment", "Auth", "AI Tools"],
   },
 ];
+
 export const skillCards = [
   {
     phase: "Phase 01",
@@ -101,27 +102,53 @@ export const skillCards = [
     "Customized framework styles to support branding and design requirements.",
   ],
 },
-
-  {
-      phase: "Phase 03",
-    title: "JavaScript & TypeScript Foundations",
-    image: "/images/journey/js-ts.svg",
-    visualType: "icon",
-
-    description:
-      "Developed interactive web experiences through JavaScript programming, DOM manipulation, event handling, and strongly typed TypeScript development.",
-
+{
+    phase: "Phase 03",
+    title: "JavaScript Fundamentals",
+    image: "/images/journey/Taskapp.png",
+    visualType: "screenshot",
     linkLabel: "Highlights",
-
+    description:
+      "Built a functional task management application using core JavaScript concepts, strengthening logic, data handling, and interactive application behavior.",
     details: [
-      "Strengthened problem-solving through real-world programming challenges.",
-      "Used DOM manipulation to create interactive user experiences.",
-      "Handled events and dynamic content updates with confidence.",
-      "Introduced TypeScript for safer and more maintainable code.",
-      "Connected application logic directly to user interactions.",
+      "Created, updated, and deleted task data using JavaScript logic",
+      "Practiced arrays, objects, functions, and conditionals",
+      "Built filtering and status-based task organization",
+      "Strengthened application state and user interaction patterns",
     ],
   },
   {
+    phase: "Phase 03",
+    title: "DOM Manipulation & Browser APIs",
+    image: "/images/journey/DOM2.png",
+    visualType: "design",
+    linkLabel: "Highlights",
+    description:
+      "Developed an interactive blog tracking tool that connected JavaScript logic to the browser through DOM manipulation, events, and local storage.",
+    details: [
+      "Manipulated DOM elements dynamically",
+      "Handled user interactions with event listeners",
+      "Persisted data using localStorage",
+      "Rendered saved blog ideas back to the interface",
+      "Improved understanding of browser-based functionality",
+    ],
+  },
+  {
+    phase: "Phase 03",
+    title: "Type-Safe Development",
+    image: "/images/journey/TS.png",
+    visualType: "icon",
+    linkLabel: "Highlights",
+    description:
+      "Built an eCommerce application while transitioning from JavaScript to TypeScript, focusing on stronger data modeling and maintainable code structure.",
+    details: [
+      "Created interfaces and custom types",
+      "Implemented type-safe application logic",
+      "Improved maintainability through modular architecture",
+      "Strengthened scalable frontend development practices",
+    ],
+  }, 
+{
       phase: "Phase 04",
     title: "React Application Development",
     image: "/images/journey/react.svg",
@@ -153,22 +180,19 @@ export const skillCards = [
       "Connected frontend and backend systems into complete workflows.",
     ],
   },
-  {
-      phase: "Phase 06",
-    title: "Full-Stack MERN Capstone",
-    image: "/images/journey/mern.svg",
-    description:
-      "Unified frontend, backend, database, authentication, and deployment into a complete business platform.",
-    tags: ["MERN", "TypeScript", "Auth", "Deployment"],
-    linkLabel: "View Capstone",
-    details: [
-      "Integrated frontend, backend, and database technologies into full-stack solutions.",
-      "Deployed production-ready applications to the web.",
-      "Applied authentication, APIs, and database design in real projects.",
-      "Leveraged AI-assisted development tools to accelerate delivery.",
-      "Delivered a complete capstone application from concept to deployment.",
-    ],
-  },
+{
+  phase: "Phase 06",
+  title: "Full-Stack MERN Development",
+  image: "/images/journey/MERN.jpeg",
+  visualType: "icon",
+  description:
+    "Built a full-stack business application using React, TypeScript, Node.js, Express, and MongoDB. This phase brought the frontend, backend, database, REST APIs, JWT authentication, protected admin routes, inquiry management, project tracking, task workflows, and deployment together into one complete MERN capstone for R4B Design Studio.",
+  tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "JWT"],
+  linkLabel: "View Capstone",
+  details: [
+    
+  ],
+},
 ];
 export const projects = [
   {
