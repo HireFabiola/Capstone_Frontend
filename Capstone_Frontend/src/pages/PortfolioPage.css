@@ -16,6 +16,16 @@ html {
   font-family: Georgia, "Times New Roman", serif;
 }
 
+body {
+  background: #ece7df;
+}
+
+.portfolio-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #fffaf3;
+}
+
 .portfolio-hero,
 .timeline-summary,
 .journey-section,
@@ -1667,4 +1677,47 @@ html {
 
 .contact-title .accent {
   color: #d59a2b;
+}
+
+.github-footer-note {
+  margin-top: 2rem;
+  padding-top: 1rem;
+
+  border-top: 1px solid rgba(255, 250, 243, 0.12);
+
+  text-align: center;
+}
+
+.github-meta span {
+  display: block;
+
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: rgba(255, 250, 243, 0.55);
+}
+
+.github-meta h4 {
+  margin: 0.4rem 0;
+
+  font-size: 1rem;
+  color: #fffaf3;
+}
+
+.github-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  font-size: 0.82rem;
+  color: rgba(255, 250, 243, 0.65);
+
+  margin-bottom: 0.75rem;
+}
+
+.github-link {
+  color: #d59a2b;
+  text-decoration: none;
+  font-weight: 700;
 }

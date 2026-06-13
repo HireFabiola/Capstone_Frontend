@@ -17,21 +17,33 @@ export default function ProjectsSection() {
       </div>
 
       <div className="projects-grid">
-        {projects.map((project) => (
-          <article className="project-card" key={project.title}>
-            <img src={project.image} alt={project.title} />
+      {projects.map((project) => (
+  <a
+    key={project.title}
+    href={project.liveUrl}
+    target="_blank"
+    rel="noreferrer"
+    className="project-card-link"
+  >
+    <article className="project-card">
+      <img src={project.image} alt={project.title} />
 
-            <h3>{project.title}</h3>
+      <h3>{project.title}</h3>
 
-            <p>{project.description}</p>
+      <p>{project.description}</p>
 
-            <div className="project-tags">
-              {project.tech.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
-          </article>
+      <div className="project-tags">
+        {project.tech.map((tag) => (
+          <span key={tag}>{tag}</span>
         ))}
+      </div>
+
+      <span className="project-launch">
+        View Live →
+      </span>
+    </article>
+  </a>
+))}
       </div>
     </section>
   );

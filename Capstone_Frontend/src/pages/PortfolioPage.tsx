@@ -40,7 +40,7 @@ export default function PortfolioPage() {
           Let&apos;s Connect
         </a>
       </nav>
-      
+      <div className="portfolio-shell"></div>
       <PortfolioHero />
       <TimelineSummary />
       <JourneySection />
@@ -49,5 +49,6 @@ export default function PortfolioPage() {
       <PortfolioFooterQuote />
     <ContactSection />
     </div>
+
   );
 }

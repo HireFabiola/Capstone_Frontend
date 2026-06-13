@@ -201,6 +201,7 @@ export const projects = [
     description:
       "Travel exploration app with maps, APIs, and state management.",
     tech: ["TypeScript", "API", "Bootstrap"],
+    liveUrl: "https://hirefabiola.github.io/REST_Countries_API/",
   },
   {
     image: "/images/project-dashboard.png",
@@ -208,20 +209,23 @@ export const projects = [
     description:
       "Real-time dashboard with charts, filtering, and task analytics.",
     tech: ["React", "Charts", "Context API"],
+    liveUrl: "https://hirefabiola.github.io/react-task-dashboard/",
   },
-{
-  image: "/images/project-flashcard.png",
-  title: "GenAI Flashcard App",
-  description:
-    "An AI-assisted study tool that presents learning content through an interactive flashcard experience.",
-  tech: ["React", "TypeScript", "GenAI"],
-},
+  {
+    image: "/images/project-flashcard.png",
+    title: "GenAI Flashcard App",
+    description:
+      "An AI-assisted study tool that presents learning content through an interactive flashcard experience.",
+    tech: ["React", "TypeScript", "GenAI"],
+    liveUrl: "https://hirefabiola.github.io/Mod8_GenAI/",
+  },
   {
     image: "/images/project-bookshelf.png",
     title: "Digital Bookshelf",
     description:
       "Full-stack app for managing books with CRUD operations.",
     tech: ["Node.js", "Express", "EJS", "CRUD"],
+    liveUrl: "https://booklistapp-q5sm.onrender.com/",
   },
   {
     image: "/images/project-fuelwise.png",
@@ -229,5 +233,6 @@ export const projects = [
     description:
       "Team project with auth, APIs, and protected routes.",
     tech: ["React", "Node.js", "JWT"],
+    liveUrl: "https://robb-designs.github.io/fuelwise/",
   },
 ];

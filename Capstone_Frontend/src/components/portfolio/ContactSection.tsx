@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
 export default function ContactSection() {
+   const [latestRepo, setLatestRepo] = useState<any>(null);
+
+    useEffect(() => {
+        fetch("https://api.github.com/users/HireFabiola/repos")
+            .then((res) => res.json())
+            .then((data) => {
+                const sorted = data.sort(
+                    (a, b) =>
+                        new Date(b.updated_at).getTime() -
+                        new Date(a.updated_at).getTime()
+                );
+
+                setLatestRepo(sorted[0]);
+            });
+    }, []);
+
     return (
         <section id="contact" className="contact-section">
             <div className="contact-content">
@@ -37,6 +54,35 @@ export default function ContactSection() {
                     </button>
                 </form>
             </div>
+
+{latestRepo && (
+  <div className="github-footer-note">
+    <div className="github-meta">
+      <span>Currently Building</span>
+      <h4>{latestRepo.name}</h4>
+    </div>
+
+    <div className="github-stats">
+      <span>
+        Updated{" "}
+        {new Date(latestRepo.updated_at).toLocaleDateString()}
+      </span>
+
+      {latestRepo.language && (
+        <span>{latestRepo.language}</span>
+      )}
+    </div>
+
+    <a
+      href={latestRepo.html_url}
+      target="_blank"
+      rel="noreferrer"
+      className="github-link"
+    >
+      View on GitHub →
+    </a>
+  </div>
+)}
         </section>
     );
 }
