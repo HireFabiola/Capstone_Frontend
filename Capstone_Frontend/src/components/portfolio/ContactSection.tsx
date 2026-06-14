@@ -1,20 +1,36 @@
 import { useEffect, useState } from "react";
 export default function ContactSection() {
-   const [latestRepo, setLatestRepo] = useState<any>(null);
+    const [latestRepo, setLatestRepo] = useState<any>(null);
+    const [latestCommit, setLatestCommit] = useState<any>(null);
 
     useEffect(() => {
         fetch("https://api.github.com/users/HireFabiola/repos")
             .then((res) => res.json())
-            .then((data) => {
-                const sorted = data.sort(
-                    (a, b) =>
+            .then(async (repos) => {
+                const sorted = repos.sort(
+                    (a: any, b: any) =>
                         new Date(b.updated_at).getTime() -
                         new Date(a.updated_at).getTime()
                 );
 
-                setLatestRepo(sorted[0]);
+                const repo = sorted[0];
+
+                setLatestRepo(repo);
+
+                const commitResponse = await fetch(
+                    `https://api.github.com/repos/HireFabiola/${repo.name}/commits`
+                );
+
+                const commits = await commitResponse.json();
+
+                setLatestCommit(commits[0]);
             });
     }, []);
+
+    const commitText =
+        latestCommit?.commit?.message?.length > 80
+            ? latestCommit.commit.message.slice(0, 80) + "..."
+            : latestCommit?.commit?.message;
 
     return (
         <section id="contact" className="contact-section">
@@ -55,23 +71,34 @@ export default function ContactSection() {
                 </form>
             </div>
 
-{latestRepo && (
+           {latestRepo && (
   <div className="github-footer-note">
-    <div className="github-meta">
-      <span>Currently Building</span>
-      <h4>{latestRepo.name}</h4>
-    </div>
+<div className="github-status-line">
+ <span className="github-label">
+  Currently Building:{" "}
+</span>
 
-    <div className="github-stats">
-      <span>
-        Updated{" "}
-        {new Date(latestRepo.updated_at).toLocaleDateString()}
-      </span>
+  <span className="github-link">
+    {latestRepo.name}
+  </span>
 
-      {latestRepo.language && (
-        <span>{latestRepo.language}</span>
-      )}
-    </div>
+  <span className="footer-mascot">
+    👩🏾‍💻
+  </span>
+</div>
+
+    {latestCommit && (
+      <p className="commit-message">
+        "{commitText}"
+      </p>
+    )}
+
+    <p className="github-meta">
+      Updated{" "}
+      {new Date(latestRepo.updated_at).toLocaleDateString()}
+      {" • "}
+      {latestRepo.language}
+    </p>
 
     <a
       href={latestRepo.html_url}

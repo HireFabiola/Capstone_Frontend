@@ -14,20 +14,42 @@ export default function PortfolioPage() {
 
     <div className="portfolio-page">
       <nav className="portfolio-navbar">
-        {/* <div className="portfolio-brand-lockup">
-          <img
-            src="/images/r4b-logo.png"
-            alt="R4B"
-            className="portfolio-r4b-logo"
-          />
 
-          <div className="portfolio-brand-divider" />
 
-          <div className="portfolio-studio-text">
-            <span className="portfolio-design-text">Design</span>
-            <span className="portfolio-studio-word">Studio</span>
-          </div>
-        </div> */}
+        <div className="portfolio-hero-buttons">
+          <a href="#projects" className="btn-primary">
+            VIEW MY WORK
+          </a>
+
+          <a
+            href="https://github.com/HireFabiola"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-secondary"
+          >
+            GITHUB
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/fabiola-aurelien"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-secondary"
+          >
+            LINKEDIN
+          </a>
+
+          <a
+            href="#"
+            className="btn-secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              setResumeOpen(true);
+            }}
+          >
+            RESUME
+          </a>
+        </div>
 
         <div className="portfolio-nav-links">
           {/* <a href="/">Home</a> */}
@@ -47,7 +69,7 @@ export default function PortfolioPage() {
       <ProjectsSection />
       <CapstoneSection />
       <PortfolioFooterQuote />
-    <ContactSection />
+      <ContactSection />
     </div>
 
   );
