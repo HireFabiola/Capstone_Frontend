@@ -1,5 +1,7 @@
 // src/pages/PortfolioPage.tsx
+import { useState } from "react";
 import "./PortfolioPage.css";
+
 import PortfolioHero from "../components/portfolio/PortfolioHero.tsx";
 import TimelineSummary from "../components/portfolio/TimelineSummary.tsx";
 import JourneySection from "../components/portfolio/JourneySection.tsx";
@@ -9,13 +11,11 @@ import PortfolioFooterQuote from "../components/portfolio/PortfolioFooterQuote.t
 import ContactSection from "../components/portfolio/ContactSection.tsx";
 
 export default function PortfolioPage() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
-
-
     <div className="portfolio-page">
       <nav className="portfolio-navbar">
-
-
         <div className="portfolio-hero-buttons">
           <a href="#projects" className="btn-primary">
             VIEW MY WORK
@@ -52,16 +52,18 @@ export default function PortfolioPage() {
         </div>
 
         <div className="portfolio-nav-links">
-       
-          <a href="#journey" className="active">Welcome</a>
-            <a href="#contact" className="connect">
-          Let&apos;s Connect
-        </a>
-        </div>
+          <a href="#journey" className="active">
+            Welcome
+          </a>
 
-      
+          <a href="#contact" className="connect">
+            Let&apos;s Connect
+          </a>
+        </div>
       </nav>
+
       <div className="portfolio-shell"></div>
+
       <PortfolioHero />
       <TimelineSummary />
       <JourneySection />
@@ -69,7 +71,40 @@ export default function PortfolioPage() {
       <CapstoneSection />
       <PortfolioFooterQuote />
       <ContactSection />
-    </div>
 
+      {resumeOpen && (
+        <div
+          className="resume-modal"
+          onClick={() => setResumeOpen(false)}
+        >
+          <div
+            className="resume-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="resume-close"
+              onClick={() => setResumeOpen(false)}
+            >
+              ✕
+            </button>
+
+            <iframe
+              src="/Fabiola_Aurelien_Software_Engineer_Resume.pdf"
+              title="Fabiola Aurelien Resume"
+              className="resume-frame"
+            />
+
+            <a
+              href="/Fabiola_Aurelien_Software_Engineer_Resume.pdf"
+              download
+              className="btn-gold"
+            >
+              Download PDF
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
