@@ -52,15 +52,14 @@ export default function PortfolioPage() {
         </div>
 
         <div className="portfolio-nav-links">
-          {/* <a href="/">Home</a> */}
-          {/* <a href="#about">About</a> */}
+       
           <a href="#journey" className="active">Welcome</a>
-          <a href="#projects">Projects</a>
-        </div>
-
-        <a href="#contact" className="portfolio-nav-cta">
+            <a href="#contact" className="connect">
           Let&apos;s Connect
         </a>
+        </div>
+
+      
       </nav>
       <div className="portfolio-shell"></div>
       <PortfolioHero />

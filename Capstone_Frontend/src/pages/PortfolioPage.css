@@ -210,8 +210,6 @@ body {
 
 }
 
-
-
 .portfolio-hero-content {
   width: 680px;
   max-width: 680px;
@@ -285,6 +283,7 @@ body {
     align-items: end;
     justify-self: start;
     margin-left: -80px;
+    margin-top: 60px;
 
     transform: none;
   }
@@ -1307,6 +1306,7 @@ body {
   width: 100%;
   max-width: 720px;
   margin: -2.5rem auto 0;
+
 
   display: grid;
   grid-template-columns: 170px 300px 170px;
