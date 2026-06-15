@@ -15,62 +15,62 @@ export default function PortfolioPage() {
 
   return (
     <div className="portfolio-page">
-      <nav className="portfolio-navbar">
-        <div className="portfolio-hero-buttons">
-          <a href="#projects" className="btn-primary">
-            VIEW MY WORK
-          </a>
+      <div className="portfolio-shell">
+        <nav className="portfolio-navbar">
+          <div className="portfolio-hero-buttons">
+            <a href="#projects" className="btn-primary">
+              VIEW MY WORK
+            </a>
 
-          <a
-            href="https://github.com/HireFabiola"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary"
-          >
-            GITHUB
-          </a>
+            <a
+              href="https://github.com/HireFabiola"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-secondary"
+            >
+              GITHUB
+            </a>
 
-          <a
-            href="https://www.linkedin.com/in/fabiola-aurelien"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary"
-          >
-            LINKEDIN
-          </a>
+            <a
+              href="https://www.linkedin.com/in/fabiola-aurelien"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-secondary"
+            >
+              LINKEDIN
+            </a>
 
-          <a
-            href="#"
-            className="btn-secondary"
-            onClick={(e) => {
-              e.preventDefault();
-              setResumeOpen(true);
-            }}
-          >
-            RESUME
-          </a>
-        </div>
+            <a
+              href="#"
+              className="btn-secondary"
+              onClick={(e) => {
+                e.preventDefault();
+                setResumeOpen(true);
+              }}
+            >
+              RESUME
+            </a>
+          </div>
 
-        <div className="portfolio-nav-links">
-          <a href="#journey" className="active">
-            Welcome
-          </a>
+          <div className="portfolio-nav-links">
+            <a href="#journey" className="active">
+              Welcome
+            </a>
 
-          <a href="#contact" className="connect">
-            Let&apos;s Connect
-          </a>
-        </div>
-      </nav>
+            <a href="#contact" className="connect">
+              Let&apos;s Connect
+            </a>
+          </div>
+        </nav>
 
-      <div className="portfolio-shell"></div>
-
-      <PortfolioHero />
-      <TimelineSummary />
-      <JourneySection />
-      <ProjectsSection />
-      <CapstoneSection />
-      <PortfolioFooterQuote />
-      <ContactSection />
+        <PortfolioHero />
+        <TimelineSummary />
+        <JourneySection />
+        <ProjectsSection />
+        <CapstoneSection />
+        <PortfolioFooterQuote />
+        <ContactSection />
+      </div>
 
       {resumeOpen && (
         <div
