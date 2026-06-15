@@ -222,30 +222,35 @@ body {
   text-align: left;
 }
 
+.capstone-card .capstone-card-content h3 {
+  text-align: center;
+}
+
 .capstone-card-graphic {
+  box-sizing: border-box;
   width: 100%;
   max-width: 720px;
   height: 240px;
   margin: 0 auto 1.25rem;
-  padding: 0;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
-  border: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.capstone-card-graphic img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 0.75rem;
+  overflow: hidden;
   border: 1px solid rgba(200, 154, 61, 0.75);
   border-radius: 12px;
   background: #fffdf9;
   box-shadow: 0 0 0 3px rgba(200, 154, 61, 0.08);
+}
+
+.capstone-card-graphic img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
 
 .capstone-card-description {
@@ -260,10 +265,11 @@ body {
 
 .skill-thumbnail.design,
 .skill-thumbnail.screenshot {
-  padding: 0;
-  border: none;
-  background: transparent;
-  box-shadow: none;
+  padding: 0.5rem;
+  border: 1px solid rgba(200, 154, 61, 0.75);
+  border-radius: 12px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px rgba(200, 154, 61, 0.08);
 }
 
 .skill-thumbnail.design img,
@@ -271,11 +277,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
-  border: 1px solid rgba(200, 154, 61, 0.65);
-  border-radius: 12px;
-  background: #fffdf9;
-  box-shadow: 0 0 0 2px rgba(200, 154, 61, 0.08);
+  object-fit: contain;
 }
 
 /* DESKTOP HERO */
@@ -696,9 +698,12 @@ body {
 /* THUMBNAILS */
 
 .skill-thumbnail {
+  box-sizing: border-box;
   overflow: hidden;
-  border: none;
-  background: transparent;
+  border: 1px solid rgba(200, 154, 61, 0.75);
+  border-radius: 12px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px rgba(200, 154, 61, 0.08);
 }
 
 .skill-thumbnail.icon {
@@ -709,21 +714,38 @@ body {
 }
 
 .skill-thumbnail.icon img {
-  width: 48px;
-  height: 48px;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  object-position: center;
 }
 
 .skill-thumbnail.screenshot {
   width: 100%;
   height: 145px;
-  border-radius: 10px;
+  display: grid;
+  place-items: center;
 }
 
 .skill-thumbnail.screenshot img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.skill-thumbnail.screenshot.accessible-preview img {
   width: 100%;
   height: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: cover;
+  object-position: center 32%;
 }
 
 /* DESIGN CARD ONLY */
@@ -741,9 +763,6 @@ body {
   grid-row: 1;
   width: 100%;
   height: 185px;
-  border: none;
-  border-radius: 0;
-  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -751,23 +770,71 @@ body {
 }
 
 .skill-thumbnail.icon {
-  border: 1px solid #c89a3d;
-  border-radius: 12px;
-
-  box-shadow:
-    0 0 0 3px rgba(200, 154, 61, 0.08);
-
-  background: #fffdf9;
+  padding: 0.5rem;
 }
 
 .skill-card.design-card .skill-thumbnail.design img {
-  width: 125%;
-  height: 125%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   object-position: center;
-  margin-left: -12.5%;
-  border-radius: 10px;
+}
 
+.skill-thumbnail.graphic-image-frame,
+.capstone-card-graphic.graphic-image-frame {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.skill-thumbnail.graphic-image-frame {
+  overflow: visible;
+}
+
+.graphic-image-frame img {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  border: 1px solid rgba(200, 154, 61, 0.75);
+  border-radius: 12px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px rgba(200, 154, 61, 0.08);
+}
+
+.skill-thumbnail.screenshot.taskapp-preview {
+  padding: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(200, 154, 61, 0.75);
+  border-radius: 12px;
+  background: #fffdf9;
+  box-shadow: 0 0 0 3px rgba(200, 154, 61, 0.08);
+}
+
+.skill-thumbnail.screenshot.taskapp-preview img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.skill-thumbnail.no-graphic-frame,
+.skill-thumbnail.no-graphic-frame img {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .skill-card-content h3 {

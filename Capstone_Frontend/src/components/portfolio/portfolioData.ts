@@ -120,7 +120,7 @@ export const skillCards = [
   {
     phase: "Phase 03",
     title: "DOM Manipulation & Browser APIs",
-    image: "/images/journey/DOM.png",
+    image: "/images/journey/DOM2.png",
     visualType: "design",
     linkLabel: "Highlights",
     description:

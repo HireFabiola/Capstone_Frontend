@@ -48,6 +48,12 @@ export default function JourneySection() {
             <div className="journey-skills">
               {group.skills.map((skill) => {
                 const isOpen = openCard === skill.title;
+                const hasNoGraphicFrame =
+                  skill.title === "Design Systems & CSS Frameworks";
+                const isAccessiblePreview =
+                  skill.title === "Responsive & Accessible Web Page";
+                const isTaskAppPreview =
+                  skill.title === "JavaScript Fundamentals";
 
                 return (
                   <article
@@ -67,7 +73,7 @@ export default function JourneySection() {
       <h3>{skill.title}</h3>
     </div>
 
-    <div className="capstone-card-graphic">
+    <div className="capstone-card-graphic graphic-image-frame">
       <img src={skill.image} alt="" />
     </div>
 
@@ -84,6 +90,10 @@ export default function JourneySection() {
           : skill.visualType === "screenshot"
           ? "screenshot"
           : "icon"
+      } ${skill.phase === "Phase 03" ? "graphic-image-frame" : ""} ${
+        hasNoGraphicFrame ? "no-graphic-frame" : ""
+      } ${isAccessiblePreview ? "accessible-preview" : ""} ${
+        isTaskAppPreview ? "taskapp-preview" : ""
       }`}
     >
       <img src={skill.image} alt="" />
