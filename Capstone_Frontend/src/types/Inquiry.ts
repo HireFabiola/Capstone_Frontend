@@ -7,8 +7,6 @@ export interface Inquiry {
   message: string;
   budgetRange: string;
   status: "new" | "discussion" | "qualified" | "closed";
-  owner: string;
   createdAt: string;
   updatedAt: string;
 }
-

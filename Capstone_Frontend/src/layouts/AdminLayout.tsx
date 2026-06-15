@@ -26,7 +26,7 @@ const AdminLayout = () => {
                 <div className="relative flex flex-col items-center justify-center">
                     <img
                         src="/images/r4b-logo-dark.png"
-                        alt="R4B Design Studio" className="h-56 w-56 object-contain brightness-0 invert"
+                        alt="R4B Design Studio" className="h-64 w-64 object-contain brightness-0 invert"
                     />
 
                     <div className="-mt-3 flex items-center justify-center">
@@ -86,7 +86,7 @@ const AdminLayout = () => {
                     <img
                         src="/images/r4b-logo-dark.png"
                         alt="R4B Design Studio"
-                        // className="h-56 w-56 object-contain brightness-0 invert -mb-8"
+                        className="h-60 w-60 object-contain"
                     />
 
                     <div className="flex items-center justify-center">
@@ -112,25 +112,13 @@ const AdminLayout = () => {
                         Inquiries
                     </NavLink>
 
-                    <div className="group">
-                        <NavLink to="/admin/projects" className={navLinkClass}>
-                            Projects
-                        </NavLink>
+                    <NavLink to="/admin/projects" className={navLinkClass}>
+                        Projects
+                    </NavLink>
 
-                        <div className="hidden group-hover:block">
-                            <NavLink
-                                to="/admin/tasks"
-                                className={({ isActive }) =>
-                                    `block py-2 pl-8 text-sm transition ${isActive
-                                        ? "text-[#D69A2D]"
-                                        : "text-stone-300 hover:text-[#D69A2D]"
-                                    }`
-                                }
-                            >
-                                ↳ Tasks
-                            </NavLink>
-                        </div>
-                    </div>
+                    <NavLink to="/admin/tasks" className={navLinkClass}>
+                        Tasks
+                    </NavLink>
                 </nav>
 
                 {/* User Card */}

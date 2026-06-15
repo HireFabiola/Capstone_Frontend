@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 
 import {
   getProjects,
@@ -16,6 +17,11 @@ import { useCrud } from "../hooks/useCrud";
 import { useForm } from "../hooks/useForm";
 
 const ProjectsPage = () => {
+  const location = useLocation();
+  const linkedProject = (
+    location.state as { project?: Project } | null
+  )?.project;
+
   const {
     items: projects,
     isLoading,
@@ -37,16 +43,18 @@ const ProjectsPage = () => {
     resetForm,
     setFormData,
   } = useForm({
-    title: "",
-    clientName: "",
-    clientEmail: "",
-    description: "",
-    stage: "planning" as Project["stage"],
+    title: linkedProject?.title ?? "",
+    clientName: linkedProject?.clientName ?? "",
+    clientEmail: linkedProject?.clientEmail ?? "",
+    description: linkedProject?.description ?? "",
+    stage: linkedProject?.stage ?? ("planning" as Project["stage"]),
   });
 
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(
+    linkedProject?._id ?? null
+  );
 
   const {
     formData: taskFormData,
@@ -114,6 +122,12 @@ const ProjectsPage = () => {
   };
 
   const handleDeleteProject = async (id: string) => {
+    const shouldDelete = window.confirm(
+      "Delete this project and all tasks attached to it?"
+    );
+
+    if (!shouldDelete) return;
+
     try {
       await removeItem(id);
     } catch {

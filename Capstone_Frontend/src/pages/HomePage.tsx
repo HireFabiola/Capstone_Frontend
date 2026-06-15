@@ -24,7 +24,6 @@ const navigation = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
-  { label: "Portfolio", to: "/portfolio" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -115,9 +114,9 @@ export default function HomePage() {
                 Let&apos;s Build Together
                 <i className="bi bi-arrow-right" aria-hidden="true" />
               </Link>
-              <Link to="/portfolio" className="home-secondary-button">
+              <Link to="/services" className="home-secondary-button">
                 <i className="bi bi-play-circle" aria-hidden="true" />
-                View Our Work
+                Explore Services
               </Link>
             </div>
           </div>
@@ -165,7 +164,6 @@ export default function HomePage() {
           links={[
             { label: "About", to: "/about" },
             { label: "Services", to: "/services" },
-            { label: "Portfolio", to: "/portfolio" },
             { label: "Contact", to: "/contact" },
           ]}
         />

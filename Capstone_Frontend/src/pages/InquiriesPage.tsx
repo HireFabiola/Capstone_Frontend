@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import type { Inquiry } from "../types/Inquiry";
 import type { Project } from "../types/Project";
 
@@ -8,7 +9,7 @@ import {
   deleteInquiry,
 } from "../services/inquiryService";
 
-import { createProject } from "../services/projectService";
+import { createProject, getProjects } from "../services/projectService";
 import { useCrud } from "../hooks/useCrud";
 import { useForm } from "../hooks/useForm";
 
@@ -30,6 +31,36 @@ const InquiriesPage = () => {
     useState<Inquiry | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        setProjects(await getProjects());
+      } catch {
+        setError("Unable to load related projects.");
+      }
+    };
+
+    loadProjects();
+  }, [setError]);
+
+  const projectsByInquiryId = useMemo(
+    () =>
+      new Map(
+        projects.flatMap((project) => {
+          if (!project.inquiryId) return [];
+
+          const inquiryId =
+            typeof project.inquiryId === "string"
+              ? project.inquiryId
+              : project.inquiryId._id;
+
+          return [[inquiryId, project] as const];
+        })
+      ),
+    [projects]
+  );
 
   const { formData, setFormData, handleChange, resetForm } =
     useForm({
@@ -68,8 +99,8 @@ const InquiriesPage = () => {
     event.preventDefault();
 
     try {
-      await createProject(formData);
-      alert("Project created successfully.");
+      const project = await createProject(formData);
+      setProjects((currentProjects) => [project, ...currentProjects]);
       closeProjectModal();
     } catch {
       setError("Unable to create project.");
@@ -155,7 +186,17 @@ const InquiriesPage = () => {
                     <option value="closed">Closed</option>
                   </select>
 
-                  {inquiry.status === "qualified" && (
+                  {projectsByInquiryId.has(inquiry._id) ? (
+                    <Link
+                      to="/admin/projects"
+                      state={{
+                        project: projectsByInquiryId.get(inquiry._id),
+                      }}
+                      className="rounded-xl bg-[#122321] px-4 py-2 text-center font-medium text-white hover:bg-[#1C3431]"
+                    >
+                      View/Edit
+                    </Link>
+                  ) : inquiry.status === "qualified" ? (
                     <button
                       type="button"
                       onClick={() => openProjectModal(inquiry)}
@@ -163,7 +204,7 @@ const InquiriesPage = () => {
                     >
                       Create Project
                     </button>
-                  )}
+                  ) : null}
 
                   <button
                     type="button"

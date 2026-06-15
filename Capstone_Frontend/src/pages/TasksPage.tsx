@@ -41,12 +41,16 @@ const TasksPage = () => {
   });
 
   const getProjectTitle = (projectId: Task["projectId"]) => {
-  if (typeof projectId === "string") {
-    return projectId;
-  }
+    if (!projectId) {
+      return "Project no longer available";
+    }
 
-  return projectId.title;
-};
+    if (typeof projectId === "string") {
+      return projectId;
+    }
+
+    return projectId.title;
+  };
 
   useEffect(() => {
     const fetchProjects = async () => {

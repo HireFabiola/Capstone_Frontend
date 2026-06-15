@@ -1,3 +1,5 @@
+import type { Inquiry } from "./Inquiry";
+
 export interface Project {
   _id: string;
   title: string;
@@ -6,7 +8,7 @@ export interface Project {
   clientEmail: string;
   stage: "planning" | "development" | "review" | "complete";
   dueDate?: string;
-  inquiryId?: string;
+  inquiryId?: string | Inquiry;
   owner: string;
   createdAt: string;
   updatedAt: string;

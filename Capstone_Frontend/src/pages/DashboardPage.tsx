@@ -40,21 +40,31 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const loadDashboardData = async () => {
-      try {
-        const [inquiryData, projectData, taskData] = await Promise.all([
-          getInquiries(),
-          getProjects(),
-          getTasks(),
-        ]);
+      const results = await Promise.allSettled([
+        getInquiries(),
+        getProjects(),
+        getTasks(),
+      ]);
 
-        setInquiries(inquiryData);
-        setProjects(projectData);
-        setTasks(taskData);
-      } catch {
-        setError("Unable to load dashboard data.");
-      } finally {
-        setIsLoading(false);
+      const [inquiryResult, projectResult, taskResult] = results;
+
+      if (inquiryResult.status === "fulfilled") {
+        setInquiries(inquiryResult.value);
       }
+
+      if (projectResult.status === "fulfilled") {
+        setProjects(projectResult.value);
+      }
+
+      if (taskResult.status === "fulfilled") {
+        setTasks(taskResult.value);
+      }
+
+      if (results.some((result) => result.status === "rejected")) {
+        setError("Some dashboard data could not be loaded.");
+      }
+
+      setIsLoading(false);
     };
 
     loadDashboardData();
@@ -76,7 +86,6 @@ const DashboardPage = () => {
   };
 
   if (isLoading) return <p>Loading dashboard...</p>;
-  if (error) return <p>{error}</p>;
 
   const newInquiries = inquiries.filter(
     (inquiry) => inquiry.status === "new"
@@ -165,6 +174,15 @@ const DashboardPage = () => {
   
   return (
     <section className="space-y-6">
+      {error && (
+        <p
+          role="alert"
+          className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+        >
+          {error}
+        </p>
+      )}
+
       <div>
         <h1 className="text-3xl font-bold text-[#122321]">
           Welcome back, Fabiola.
@@ -192,7 +210,10 @@ const DashboardPage = () => {
           />
         </Link>
 
-        <Link to="/admin/tasks">
+        <Link
+          to="/admin/tasks"
+          className="block transition hover:-translate-y-1 hover:shadow-md"
+        >
           <MetricCard
             title="Open Tasks"
             value={openTasks}
@@ -256,10 +277,19 @@ const DashboardPage = () => {
     </div>
   </section>
 
-  <section className="overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm">
-    <h2 className="mb-4 text-xl font-bold text-[#122321]">
-      Open Tasks
-    </h2>
+  <Link
+    to="/admin/tasks"
+    className="block overflow-hidden rounded-2xl border border-[#D8C6B5] bg-[#FFF9F4] p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  >
+    <div className="mb-4 flex items-center justify-between gap-4">
+      <h2 className="text-xl font-bold text-[#122321]">
+        Open Tasks
+      </h2>
+
+      <span className="text-sm font-medium text-[#9b6a16]">
+        View all
+      </span>
+    </div>
 
     <div className="space-y-4">
       {tasks.filter((task) => task.status !== "complete").length === 0 ? (
@@ -284,7 +314,7 @@ const DashboardPage = () => {
           ))
       )}
     </div>
-  </section>
+  </Link>
 
   <Link
     to="/admin/projects"
