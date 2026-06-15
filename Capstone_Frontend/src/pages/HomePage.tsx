@@ -1,195 +1,233 @@
-import "../App.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "../App.css";
 import DesignAssistant from "../components/DesignAssistant";
 
-
 type FeatureProps = {
-    icon: string;
-    title: string;
-    description: string;
+  icon: string;
+  title: string;
+  description: string;
+};
+
+type FooterLink = {
+  label: string;
+  to: string;
 };
 
 type FooterColumnProps = {
-    title: string;
-    links: string[];
+  title: string;
+  links: FooterLink[];
 };
 
+const navigation = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Portfolio", to: "/portfolio" },
+  { label: "Contact", to: "/contact" },
+];
+
+const features: FeatureProps[] = [
+  {
+    icon: "bi-people",
+    title: "Client Focused",
+    description: "Solutions designed around your clients and their experience.",
+  },
+  {
+    icon: "bi-gear",
+    title: "Workflow Driven",
+    description: "Systems and tools that simplify processes and save time.",
+  },
+  {
+    icon: "bi-graph-up-arrow",
+    title: "Built for Growth",
+    description: "Practical digital solutions that support your long-term goals.",
+  },
+  {
+    icon: "bi-leaf",
+    title: "Thoughtful Design",
+    description: "Clean, intentional design that reflects your brand and builds trust.",
+  },
+];
+
 export default function HomePage() {
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    return (
-        <main className="home-page">
-            <section
-                className="hero"
-                style={{
-                    backgroundImage: `
-      linear-gradient(
-        90deg,
-        rgba(244, 229, 218, 0.98) 0%,
-        rgba(244, 229, 218, 0.94) 25%,
-        rgba(244, 229, 218, 0.65) 45%,
-        rgba(244, 229, 218, 0.2) 65%,
-        rgba(244, 229, 218, 0) 82%
-      ),
-      url("/images/r4b-hero.png")
-    `,
-                }}
-            >
+  return (
+    <main className="home-page">
+      <section className="home-hero">
+        <nav className="home-navbar" aria-label="Primary navigation">
+          <Link to="/" className="home-brand" aria-label="R4B Design Studio home">
+            <img src="/images/r4b-logo.png" alt="" />
+            <span className="home-brand-divider" aria-hidden="true" />
+            <span className="home-brand-name">
+              <strong>Design</strong> Studio
+            </span>
+          </Link>
 
+          <button
+            className={`home-nav-toggle ${menuOpen ? "is-open" : ""}`}
+            type="button"
+            onClick={() => setMenuOpen((current) => !current)}
+            aria-expanded={menuOpen}
+            aria-controls="home-navigation"
+            aria-label="Toggle navigation"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
 
-                <nav className="navbar">
-                    <div className="brand">
-                        <img src="/images/r4b-logo.png" alt="R4B Design Studio" />
-                        <div className="brand-divider"></div>
-                        <p>
-                            <span>DESIGN</span> STUDIO
-                        </p>
-                    </div>
+          <div
+            id="home-navigation"
+            className={`home-nav-links ${menuOpen ? "is-open" : ""}`}
+          >
+            {navigation.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+        </nav>
 
-                    <button
-                        className={`nav-toggle ${menuOpen ? "open" : ""}`}
-                        type="button"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label="Toggle navigation"
-                    >
-                        <span />
-                        <span />
-                        <span />
-                    </button>
+        <div className="home-hero-layout">
+          <div className="home-hero-content">
+            <p className="home-eyebrow">Strategy. Systems. Design.</p>
+            <h1>
+              Growing your business
+              <br />
+              with clarity and purpose.
+            </h1>
+            <span className="home-gold-line" aria-hidden="true" />
+            <p className="home-hero-description">
+              Thoughtful design, practical systems, and digital tools that help
+              you work smarter, serve clients better, and grow sustainably.
+            </p>
 
-                    <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-                        <a className="active" href="/" onClick={() => setMenuOpen(false)}>Home</a>
-                        <a href="/about" onClick={() => setMenuOpen(false)}>About</a>
-                        <a href="/services" onClick={() => setMenuOpen(false)}>Services</a>
-                        <a href="/portfolio" onClick={() => setMenuOpen(false)}>Portfolio</a>
-                        <a href="/contact" onClick={() => setMenuOpen(false)}>Contact</a>
-                    </div>
-                </nav>
+            <div className="home-hero-buttons">
+              <Link to="/contact" className="home-primary-button">
+                Let&apos;s Build Together
+                <i className="bi bi-arrow-right" aria-hidden="true" />
+              </Link>
+              <Link to="/portfolio" className="home-secondary-button">
+                <i className="bi bi-play-circle" aria-hidden="true" />
+                View Our Work
+              </Link>
+            </div>
+          </div>
+        </div>
 
-                <div className="hero-content">
-                    <h1>Growing your business <br />with clarity and purpose.</h1>
-                    <div className="gold-line"></div>
-                    <p>
-                        Thoughtful design, practical systems, and digital tools that help
-                        you work smarter, serve clients better, and grow sustainably.
-                    </p>
-                    <img
-                        src="/images/r4b-hero.png"
-                        alt="R4B Design Studio"
-                        className="hero-mobile-image"
-                    />
+        <div className="home-responsive-visual">
+          <img
+            src="/images/r4b-hero.png"
+            alt="A design consultant presenting an R4B website concept to a client"
+          />
+        </div>
 
-                    <div className="hero-buttons">
-                        <button className="primary-btn"><Link to="/contact">LET’S BUILD TOGETHER →</Link></button>
-                        <button className="secondary-btn">
-                            <span>▷</span> <Link to="/portfolio">VIEW OUR WORK</Link>
-                        </button>
-                    </div>
-                </div>
-            </section>
+        <div className="home-feature-strip">
+          {features.map((feature) => (
+            <Feature key={feature.title} {...feature} />
+          ))}
+        </div>
+      </section>
 
-            <section className="feature-strip">
-                <Feature
-                    icon="👥"
-                    title="CLIENT FOCUSED"
-                    description="Solutions designed around your clients and their experience."
-                />
-                <Feature
-                    icon="⚙️"
-                    title="WORKFLOW DRIVEN"
-                    description="Systems and tools that simplify processes and save time."
-                />
-                <Feature
-                    icon="📈"
-                    title="BUILT FOR GROWTH"
-                    description="Practical digital solutions that support your long-term goals."
-                />
-                <Feature
-                    icon="🍃"
-                    title="THOUGHTFUL DESIGN"
-                    description="Clean, intentional design that reflects your brand and builds trust."
-                />
-                <DesignAssistant />
-            </section>
+      <footer className="home-footer">
+        <div className="home-footer-brand">
+          <img src="/images/r4b-logo-dark.png" alt="R4B Design Studio" />
+          <div>
+            <p className="home-footer-kicker">Design Studio</p>
+            <p className="home-footer-summary">
+              Helping small businesses improve client experience, simplify
+              workflows, and build practical digital tools for meaningful growth.
+            </p>
+            <div className="home-social-links" aria-label="Social links">
+              <a href="#" aria-label="Instagram">
+                <i className="bi bi-instagram" />
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <i className="bi bi-linkedin" />
+              </a>
+              <a href="mailto:hello@r4bdesignstudio.com" aria-label="Email">
+                <i className="bi bi-envelope" />
+              </a>
+            </div>
+          </div>
+        </div>
 
-            <footer className="footer">
-                <div className="flex flex-col items-center text-center">
-                    <h3 className="mb-4 text-sm tracking-[3px] text-[#A56F08]">
-                        FIND US
-                    </h3>
+        <FooterColumn
+          title="Explore"
+          links={[
+            { label: "About", to: "/about" },
+            { label: "Services", to: "/services" },
+            { label: "Portfolio", to: "/portfolio" },
+            { label: "Contact", to: "/contact" },
+          ]}
+        />
 
-                    <img
-                        src="/images/r4b-logo-dark.png"
-                        alt="R4B Design Studio" />
+        <div className="home-footer-column">
+          <h2>Services</h2>
+          <p>Custom Websites</p>
+          <p>Business Systems</p>
+          <p>Client Experience</p>
+          <p>Workflow Automation</p>
+          <p>Ongoing Support</p>
+        </div>
 
-                    <p className="mb-4 text-white">
-                        @r4bdesignstudio
-                    </p>
+        <div className="home-footer-column home-footer-contact">
+          <h2>Let&apos;s Connect</h2>
+          <a href="mailto:hello@r4bdesignstudio.com">
+            <i className="bi bi-envelope" aria-hidden="true" />
+            hello@r4bdesignstudio.com
+          </a>
+          <a href="tel:+18645550148">
+            <i className="bi bi-telephone" aria-hidden="true" />
+            (864) 555-0148
+          </a>
+          <p>
+            <i className="bi bi-geo-alt" aria-hidden="true" />
+            Greenville, SC
+          </p>
+          <Link to="/admin/login" className="home-login-link">
+            <i className="bi bi-lock" aria-hidden="true" />
+            Studio Login
+          </Link>
+        </div>
+      </footer>
 
-                    <div className="mb-6 flex gap-5 text-2xl text-white">
-                        <i className="bi bi-instagram hover:text-[#A56F08]"></i>
-                        <i className="bi bi-facebook hover:text-[#A56F08]"></i>
-                        <i className="bi bi-twitter-x hover:text-[#A56F08]"></i>
-                    </div>
-
-                    <p className="text-xs text-white/60">
-                        © R4B Design Studio
-                    </p>
-                </div>
-
-                <FooterColumn
-                    title="EXPLORE"
-                    links={["About", "Services", "Portfolio", "Contact"]}
-                />
-
-                <FooterColumn
-                    title="SERVICES"
-                    links={[
-                        "Custom Websites",
-                        "Business Systems",
-                        "Client Experience",
-                        "Workflow Automation",
-                        "Ongoing Support",
-                    ]}
-                />
-
-                <div className="footer-column">
-                    <h3>LET’S CONNECT</h3>
-                    <p>✉ hello@r4bdesignstudio.com</p>
-                    <p>☎ (864) 555-0148</p>
-                    <p>⌖ Greenville, SC</p>
-                    <Link to="/admin/login" className="login-link">🔒 Admin Login</Link>
-                </div>
-
-            </footer>
-
-        </main>
-    );
+      <DesignAssistant />
+    </main>
+  );
 }
 
 function Feature({ icon, title, description }: FeatureProps) {
-    return (
-        <article className="feature-card">
-            <div className="feature-icon">{icon}</div>
-            <div>
-                <h3>{title}</h3>
-                <p>{description}</p>
-            </div>
-        </article>
-    );
+  return (
+    <article className="home-feature-card">
+      <div className="home-feature-icon">
+        <i className={`bi ${icon}`} aria-hidden="true" />
+      </div>
+      <div>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+    </article>
+  );
 }
 
 function FooterColumn({ title, links }: FooterColumnProps) {
-    return (
-        <div className="footer-column">
-            <h3>{title}</h3>
-            {links.map((link) => (
-                <a href="#" key={link}>
-                    {link}
-                </a>
-            ))}
-        </div>
-    );
+  return (
+    <div className="home-footer-column">
+      <h2>{title}</h2>
+      {links.map((link) => (
+        <Link to={link.to} key={link.to}>
+          {link.label}
+        </Link>
+      ))}
+    </div>
+  );
 }
