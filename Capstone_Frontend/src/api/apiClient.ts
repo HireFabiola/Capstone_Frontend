@@ -4,6 +4,7 @@ import axios from "axios";
 // Create an axios instance with a base URL from environment variables and set up an interceptor to include the authentication token in the headers of each request if it exists in localStorage
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  timeout: 10000,
 });
 
 //  

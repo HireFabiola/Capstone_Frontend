@@ -1,4 +1,5 @@
 // src/components/portfolio/CapstoneSection.tsx
+import { Link } from "react-router-dom";
 
 export default function CapstoneSection() {
   return (
@@ -74,12 +75,12 @@ export default function CapstoneSection() {
 
         <div className="capstone-buttons">
 
-          <a
-            href="#"
+          <Link
+            to="/"
             className="btn-gold"
           >
             View Live Site
-          </a>
+          </Link>
 
           <a
             href="#"

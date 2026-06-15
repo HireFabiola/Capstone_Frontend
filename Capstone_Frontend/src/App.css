@@ -792,6 +792,37 @@ main:not(.public-layout-main) {
   box-shadow: 0 0 0 3px rgba(165, 111, 8, 0.15);
 }
 
+.field-help {
+  color: #6b625c;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.login-error {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d7a59f;
+  border-radius: 10px;
+  background: #fff1ef;
+  color: #8b2f27;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.login-error-link {
+  width: fit-content;
+  color: #8b2f27;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login-error-link:hover {
+  color: #102022;
+}
+
 .admin-login-card button,
 .success-button {
   margin-top: 1rem;
