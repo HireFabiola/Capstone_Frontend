@@ -183,8 +183,8 @@ export const skillCards = [
 {
   phase: "Phase 06",
   title: "Full-Stack MERN Development",
-  image: "/images/journey/MERN.jpeg",
-  visualType: "icon",
+  image: "/images/journey/MERN.png",
+  visualType: "capstone",
   description:
     "Built a full-stack business application using React, TypeScript, Node.js, Express, and MongoDB. This phase brought the frontend, backend, database, REST APIs, JWT authentication, protected admin routes, inquiry management, project tracking, task workflows, and deployment together into one complete MERN capstone for R4B Design Studio.",
   tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "JWT"],
