@@ -5,8 +5,8 @@ import DesignAssistant from "../components/DesignAssistant";
 
 const navigation = [
   { label: "Home", to: "/" },
-  { label: "Services", to: "/services" },
   { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
   { label: "Contact", to: "/contact" },
 ];
 

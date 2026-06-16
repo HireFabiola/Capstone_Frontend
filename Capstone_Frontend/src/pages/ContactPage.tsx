@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { createInquiry } from "../services/inquiryService";
 import "../App.css";
 
@@ -20,10 +21,18 @@ const initialForm: InquiryForm = {
   message: "",
 };
 
+const navigation = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Contact", to: "/contact" },
+];
+
 export default function ContactPage() {
   const [formData, setFormData] = useState(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function handleChange(
     e: React.ChangeEvent<
@@ -59,6 +68,45 @@ export default function ContactPage() {
 
   return (
     <main className="contact-page">
+      <nav className="home-navbar contact-navbar" aria-label="Primary navigation">
+        <Link to="/" className="home-brand" aria-label="R4B Design Studio home">
+          <img src="/images/r4b-logo-mark.png" alt="" />
+          <span className="home-brand-divider" aria-hidden="true" />
+          <span className="home-brand-name">
+            <strong>Design</strong> Studio
+          </span>
+        </Link>
+
+        <button
+          className={`home-nav-toggle ${menuOpen ? "is-open" : ""}`}
+          type="button"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-expanded={menuOpen}
+          aria-controls="contact-navigation"
+          aria-label="Toggle navigation"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <div
+          id="contact-navigation"
+          className={`home-nav-links ${menuOpen ? "is-open" : ""}`}
+        >
+          {navigation.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+
       <section className="contact-layout">
         <div className="contact-intro">
           <p className="contact-eyebrow">LET'S CONNECT</p>

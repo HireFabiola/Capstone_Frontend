@@ -47,6 +47,24 @@ main:not(.public-layout-main) {
   padding: 2rem;
 }
 
+:root {
+  --r4b-hero-green-rgb: 43, 68, 57;
+  --r4b-hero-green-deep: #2b4439;
+  --r4b-hero-green-mid: #3c5f50;
+  --r4b-hero-green-shadow: #20362d;
+  --r4b-hero-accent: #aebe73;
+  --r4b-nav-green-rgb: 213, 225, 190;
+  --r4b-nav-hero-fade: linear-gradient(
+    to bottom,
+    rgba(var(--r4b-hero-green-rgb), 0.46) 0%,
+    rgba(var(--r4b-hero-green-rgb), 0.4) 18%,
+    rgba(var(--r4b-hero-green-rgb), 0.3) 38%,
+    rgba(var(--r4b-hero-green-rgb), 0.18) 62%,
+    rgba(var(--r4b-hero-green-rgb), 0.08) 82%,
+    rgba(var(--r4b-hero-green-rgb), 0) 100%
+  );
+}
+
 /* =====================================================
    ADMIN DASHBOARD LAYOUT
 ===================================================== */
@@ -571,25 +589,18 @@ main:not(.public-layout-main) {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: -58px;
+  bottom: -260px;
   left: 0;
   z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 20, 17, 0.76) 0%,
-    rgba(10, 20, 17, 0.66) 24%,
-    rgba(10, 20, 17, 0.46) 52%,
-    rgba(10, 20, 17, 0.2) 78%,
-    rgba(10, 20, 17, 0) 100%
-  );
+  background: var(--r4b-nav-hero-fade);
   pointer-events: none;
 }
 
 .about-navbar {
-  width: min(100%, 1440px);
-  height: 72px;
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  width: auto;
+  height: 68px;
+  margin: 0;
+  padding: 0 max(6vw, calc((100vw - 1240px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -597,22 +608,45 @@ main:not(.public-layout-main) {
 }
 
 .about-navbar .home-brand,
-.about-navbar .home-nav-links a {
-  color: #fff;
+.about-navbar .home-nav-links a,
+.contact-navbar .home-brand,
+.contact-navbar .home-nav-links a {
+  color: #fffaf0;
 }
 
-.about-navbar .home-brand img {
-  width: 96px;
-  height: 78px;
+.about-navbar .home-nav-links a:hover,
+.about-navbar .home-nav-links a.active,
+.contact-navbar .home-nav-links a:hover,
+.contact-navbar .home-nav-links a.active {
+  color: var(--r4b-hero-accent);
+}
+
+.about-navbar .home-nav-links a::after,
+.contact-navbar .home-nav-links a::after {
+  background: var(--r4b-hero-accent);
+}
+
+.about-navbar .home-brand-name strong,
+.contact-navbar .home-brand-name strong {
+  color: var(--r4b-hero-accent);
+}
+
+.about-navbar .home-brand img,
+.contact-navbar .home-brand img {
+  width: 82px;
+  height: 66px;
   filter: brightness(0) invert(1);
 }
 
-.about-navbar .home-brand-divider {
+.about-navbar .home-brand-divider,
+.contact-navbar .home-brand-divider {
   align-self: center;
+  background: var(--r4b-hero-accent);
 }
 
-.about-navbar .home-nav-toggle span {
-  background: #fff;
+.about-navbar .home-nav-toggle span,
+.contact-navbar .home-nav-toggle span {
+  background: #fffaf0;
 }
 
 .about-hero {
@@ -627,13 +661,18 @@ main:not(.public-layout-main) {
   background:
     linear-gradient(
       90deg,
-      rgba(8, 17, 14, 0.98) 0%,
-      rgba(8, 17, 14, 0.9) 34%,
-      rgba(8, 17, 14, 0.55) 57%,
-      rgba(8, 17, 14, 0.16) 100%
+      rgba(var(--r4b-hero-green-rgb), 0.94) 0%,
+      rgba(var(--r4b-hero-green-rgb), 0.82) 34%,
+      rgba(var(--r4b-hero-green-rgb), 0.48) 57%,
+      rgba(var(--r4b-hero-green-rgb), 0.12) 100%
     ),
     url("/images/about-hero-tree-roots.png") right center / cover no-repeat,
-    linear-gradient(90deg, #101b18 0%, #16241e 48%, #0c1713 100%);
+    linear-gradient(
+      90deg,
+      var(--r4b-hero-green-deep) 0%,
+      var(--r4b-hero-green-mid) 48%,
+      var(--r4b-hero-green-shadow) 100%
+    );
   background-attachment: scroll, fixed, scroll;
   color: #f8f3e9;
 }
@@ -1056,13 +1095,18 @@ main:not(.public-layout-main) {
   background:
     linear-gradient(
       90deg,
-      rgba(8, 17, 14, 0.98) 0%,
-      rgba(8, 17, 14, 0.9) 34%,
-      rgba(8, 17, 14, 0.55) 57%,
-      rgba(8, 17, 14, 0.16) 100%
+      rgba(var(--r4b-hero-green-rgb), 0.94) 0%,
+      rgba(var(--r4b-hero-green-rgb), 0.82) 34%,
+      rgba(var(--r4b-hero-green-rgb), 0.48) 57%,
+      rgba(var(--r4b-hero-green-rgb), 0.12) 100%
     ),
     url("/images/about-hero-tree-roots.png") right center / cover no-repeat,
-    linear-gradient(90deg, #101b18 0%, #16241e 48%, #0c1713 100%);
+    linear-gradient(
+      90deg,
+      var(--r4b-hero-green-deep) 0%,
+      var(--r4b-hero-green-mid) 48%,
+      var(--r4b-hero-green-shadow) 100%
+    );
   background-attachment: scroll, fixed, scroll;
   color: #f8f3e9;
 }
@@ -1350,12 +1394,12 @@ main:not(.public-layout-main) {
     background:
       linear-gradient(
         180deg,
-        rgba(8, 17, 14, 0.94) 0%,
-        rgba(8, 17, 14, 0.84) 48%,
-        rgba(8, 17, 14, 0.58) 100%
+        rgba(var(--r4b-hero-green-rgb), 0.9) 0%,
+        rgba(var(--r4b-hero-green-rgb), 0.76) 48%,
+        rgba(var(--r4b-hero-green-rgb), 0.52) 100%
       ),
       url("/images/about-hero-tree-roots.png") 70% center / cover no-repeat,
-      #101b18;
+      var(--r4b-hero-green-deep);
     background-attachment: scroll;
   }
 
@@ -1403,17 +1447,6 @@ main:not(.public-layout-main) {
     justify-content: center;
   }
 
-  .about-navbar {
-    height: 62px;
-    padding: 0 1rem;
-  }
-
-  .about-navbar .home-nav-links.is-open {
-    top: 58px;
-    right: 1rem;
-    background: rgba(16, 33, 29, 0.97);
-  }
-
   .about-hero {
     min-height: auto;
     padding: 4rem 1.5rem;
@@ -1422,12 +1455,12 @@ main:not(.public-layout-main) {
     background:
       linear-gradient(
         180deg,
-        rgba(8, 17, 14, 0.94) 0%,
-        rgba(8, 17, 14, 0.84) 48%,
-        rgba(8, 17, 14, 0.58) 100%
+        rgba(var(--r4b-hero-green-rgb), 0.9) 0%,
+        rgba(var(--r4b-hero-green-rgb), 0.76) 48%,
+        rgba(var(--r4b-hero-green-rgb), 0.52) 100%
       ),
       url("/images/about-hero-tree-roots.png") 70% center / cover no-repeat,
-      #101b18;
+      var(--r4b-hero-green-deep);
   }
 
   .about-hero-content {
@@ -1606,18 +1639,68 @@ main:not(.public-layout-main) {
 ===================================================== */
 
 .contact-page {
+  position: relative;
+  width: 100%;
+  max-width: none !important;
   min-height: 100vh;
-  background: #f4e5da;
+  margin: 0;
+  padding: 0 !important;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(var(--r4b-hero-green-rgb), 0.94) 0%,
+      rgba(var(--r4b-hero-green-rgb), 0.82) 34%,
+      rgba(var(--r4b-hero-green-rgb), 0.48) 57%,
+      rgba(var(--r4b-hero-green-rgb), 0.12) 100%
+    ),
+    url("/images/about-hero-tree-roots.png") right center / cover no-repeat fixed,
+    linear-gradient(
+      90deg,
+      var(--r4b-hero-green-deep) 0%,
+      var(--r4b-hero-green-mid) 48%,
+      var(--r4b-hero-green-shadow) 100%
+    );
   color: #102022;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.contact-page::before {
+  content: none;
+}
+
+.contact-navbar {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+  padding-right: max(6vw, calc((100vw - 1240px) / 2));
+  padding-left: max(6vw, calc((100vw - 1240px) / 2));
+  flex: 0 0 auto;
+}
+
+.contact-navbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -260px;
+  left: 0;
+  z-index: -1;
+  background: var(--r4b-nav-hero-fade);
+  pointer-events: none;
 }
 
 .contact-layout {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1350px;
   margin: 0 auto;
-  padding: 3rem 4rem;
+  padding: 3.25rem 4rem 4rem;
+  flex: 1;
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
   gap: 2.5rem;
@@ -1625,13 +1708,14 @@ main:not(.public-layout-main) {
 }
 
 .contact-eyebrow {
-  color: #a56f08;
+  color: var(--r4b-hero-accent);
   letter-spacing: 0.35rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .contact-intro h1 {
+  color: #fffaf0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(3.8rem, 5vw, 5.4rem);
   font-weight: 500;
@@ -1640,6 +1724,7 @@ main:not(.public-layout-main) {
 }
 
 .contact-description {
+  color: rgba(255, 250, 246, 0.88);
   font-size: 1.15rem;
   line-height: 1.6;
   max-width: 560px;
@@ -1647,15 +1732,18 @@ main:not(.public-layout-main) {
 }
 
 .contact-details-card {
-  background: rgba(255, 247, 240, 0.7);
-  border: 1px solid #d8c6b5;
+  color: #162720;
+  background: rgba(255, 247, 240, 0.48);
+  border: 1px solid rgba(255, 247, 240, 0.4);
   border-radius: 20px;
   padding: 1.5rem;
   max-width: 420px;
+  box-shadow: 0 18px 38px rgba(13, 28, 23, 0.18);
+  backdrop-filter: blur(22px);
 }
 
 .contact-details-card h2 {
-  color: #a56f08;
+  color: var(--r4b-hero-accent);
   font-size: 1.1rem;
   margin-top: 0;
 }
@@ -1666,11 +1754,12 @@ main:not(.public-layout-main) {
 
 .contact-form,
 .compact-contact-form {
-  background: rgba(255, 247, 240, 0.9);
-  border: 1px solid #d8c6b5;
+  background: rgba(255, 247, 240, 0.5);
+  border: 1px solid rgba(255, 247, 240, 0.44);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 20px 45px rgba(16, 32, 34, 0.08);
+  box-shadow: 0 28px 65px rgba(13, 28, 23, 0.24);
+  backdrop-filter: blur(24px);
 }
 
 .form-row {
@@ -1690,11 +1779,11 @@ main:not(.public-layout-main) {
 .contact-form input,
 .contact-form select,
 .contact-form textarea {
-  border: 1px solid #d8c6b5;
+  border: 1px solid rgba(105, 82, 54, 0.22);
   border-radius: 10px;
   padding: 0.85rem;
   font: inherit;
-  background: #fffaf5;
+  background: rgba(255, 250, 245, 0.68);
   color: #102022;
 }
 
@@ -2299,6 +2388,33 @@ main:not(.public-layout-main) {
   .home-nav-links.is-open a.active {
     background: rgba(173, 118, 16, 0.09);
   }
+
+  .about-navbar .home-nav-toggle,
+  .contact-navbar .home-nav-toggle {
+    border-color: rgba(174, 190, 115, 0.72);
+    background: rgba(var(--r4b-hero-green-rgb), 0.72);
+    backdrop-filter: blur(10px);
+  }
+
+  .about-navbar .home-nav-links.is-open,
+  .contact-navbar .home-nav-links.is-open {
+    border-color: rgba(174, 190, 115, 0.34);
+    background: rgba(var(--r4b-hero-green-rgb), 0.94);
+    backdrop-filter: blur(14px);
+  }
+
+  .about-navbar .home-nav-links.is-open a,
+  .contact-navbar .home-nav-links.is-open a {
+    color: #fffaf0;
+  }
+
+  .about-navbar .home-nav-links.is-open a:hover,
+  .about-navbar .home-nav-links.is-open a.active,
+  .contact-navbar .home-nav-links.is-open a:hover,
+  .contact-navbar .home-nav-links.is-open a.active {
+    background: rgba(174, 190, 115, 0.14);
+    color: var(--r4b-hero-accent);
+  }
 }
 
 @media (max-width: 932px) {
@@ -2542,13 +2658,21 @@ main:not(.public-layout-main) {
     bottom: 1rem;
   }
 
-  .contact-page {
-    align-items: flex-start;
-  }
-
   .contact-layout {
     grid-template-columns: 1fr;
     padding: 2rem 1.5rem;
+  }
+
+  .contact-page {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(var(--r4b-hero-green-rgb), 0.9) 0%,
+        rgba(var(--r4b-hero-green-rgb), 0.76) 48%,
+        rgba(var(--r4b-hero-green-rgb), 0.52) 100%
+      ),
+      url("/images/about-hero-tree-roots.png") 68% center / cover no-repeat,
+      var(--r4b-hero-green-deep);
   }
 
   .form-row {
@@ -2722,30 +2846,6 @@ main:not(.public-layout-main) {
   .typing-dots span,
   .fab-typed-message::after {
     animation: none;
-  }
-}
-
-@media (max-width: 1100px) {
-  .about-navbar .home-nav-toggle {
-    border-color: rgba(174, 190, 115, 0.72);
-    background: rgba(10, 20, 17, 0.42);
-    backdrop-filter: blur(10px);
-  }
-
-  .about-navbar .home-nav-links.is-open {
-    border-color: rgba(174, 190, 115, 0.32);
-    background: rgba(10, 20, 17, 0.9);
-    backdrop-filter: blur(14px);
-  }
-
-  .about-navbar .home-nav-links.is-open a {
-    color: #fff;
-  }
-
-  .about-navbar .home-nav-links.is-open a:hover,
-  .about-navbar .home-nav-links.is-open a.active {
-    background: rgba(174, 190, 115, 0.15);
-    color: #aebe73;
   }
 }
 
