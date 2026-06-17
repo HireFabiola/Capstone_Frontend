@@ -14,6 +14,7 @@ Create a root `.env` file with:
 
 ```bash
 VITE_API_URL=http://localhost:3000/api
+VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your_form_id
 ```
 
 ## Checks

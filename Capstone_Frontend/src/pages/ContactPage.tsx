@@ -28,10 +28,42 @@ const navigation = [
   { label: "Contact", to: "/contact" },
 ];
 
+const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as
+  | string
+  | undefined;
+
+async function submitToFormspree(formData: InquiryForm) {
+  if (!formspreeEndpoint) {
+    throw new Error("Formspree endpoint is not configured.");
+  }
+
+  const response = await fetch(formspreeEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: formData.clientName,
+      email: formData.email,
+      businessName: formData.businessName,
+      projectType: formData.projectType,
+      budgetRange: formData.budgetRange,
+      message: formData.message,
+      subject: `New R4B inquiry from ${formData.clientName}`,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Formspree rejected the inquiry.");
+  }
+}
+
 export default function ContactPage() {
   const [formData, setFormData] = useState(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
   function handleChange(
@@ -53,14 +85,26 @@ export default function ContactPage() {
     e.preventDefault();
 
     setIsSubmitting(true);
+    setSubmitError("");
 
     try {
-      await createInquiry(formData);
+      await submitToFormspree(formData);
+
+      if (import.meta.env.VITE_API_URL) {
+        try {
+          await createInquiry(formData);
+        } catch (error) {
+          console.warn("Inquiry email sent, but CRM save failed:", error);
+        }
+      }
 
       setFormData(initialForm);
       setSuccess(true);
     } catch (error) {
       console.error("Failed to submit inquiry:", error);
+      setSubmitError(
+        "We could not send your inquiry right now. Please try again or email hello@r4bdesignstudio.com."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -251,6 +295,12 @@ export default function ContactPage() {
               ? "SENDING..."
               : "SEND INQUIRY →"}
           </button>
+
+          {submitError && (
+            <p className="contact-form-error" role="alert">
+              {submitError}
+            </p>
+          )}
         </form>
       </section>
 

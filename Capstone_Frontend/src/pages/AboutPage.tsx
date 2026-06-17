@@ -233,7 +233,7 @@ export default function AboutPage() {
 
         <blockquote>
           <i className="bi bi-quote" aria-hidden="true" />
-          We understand that technology is not the goal.
+          <br/>We understand that technology is not the goal.
           <br />
           <strong>Results are.</strong>
         </blockquote>
