@@ -45,7 +45,15 @@
     <meta name="twitter:image:alt" content="Fabiola Aurelien portfolio social preview" />
 
     <script>
-      window.location.replace("/portfolio");
+      const isSocialCrawler =
+        /LinkedInBot|facebookexternalhit|Twitterbot|Slackbot|Discordbot|WhatsApp|TelegramBot|SkypeUriPreview/i.test(
+          navigator.userAgent
+        );
+      const searchParams = new URLSearchParams(window.location.search);
+
+      if (!isSocialCrawler && !searchParams.has("preview")) {
+        window.location.replace("/portfolio");
+      }
     </script>
   </head>
   <body>
