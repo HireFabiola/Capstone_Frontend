@@ -194,6 +194,37 @@ export const skillCards = [
   ],
 },
 ];
+
+export type LinkedInReflection = {
+  title: string;
+  excerpt: string;
+  linkedinUrl: string;
+};
+
+export const linkedInReflections: LinkedInReflection[] = [
+  {
+    title: "Owning the Thinking Behind the Code",
+    excerpt:
+      "At the beginning of my software engineering program, using AI in my workflow felt uncomfortable. Not because I didn't believe in AI. Because I felt like I had to own every line of code by writing every line myself.",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/fabiola-aurelien_softwareengineering-artificialintelligence-activity-7475533195430588417-GHF-?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA4GiKgBpPZXov-UX-LTEP0Z6xGu-D3xUE4",
+  },
+  {
+    title: "Character Still Matters",
+    excerpt:
+      "On Monday, I graduated from Per Scholas' Software Engineering program. I expected to feel proud. I expected to feel relieved. What I didn't expect was to be moved to tears.",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/fabiola-aurelien_perscholas-softwareengineering-womenintech-activity-7470822179480363008-hwU3?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA4GiKgBpPZXov-UX-LTEP0Z6xGu-D3xUE4",
+  },
+  {
+    title: "The Tools Changed, But the Thinking Hasn't",
+    excerpt:
+      "Lately I've received a few compliments on my UI design work, and it got me thinking. Long before I was building interfaces, I was walking into real estate projects and envisioning possibilities.",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/fabiola-aurelien_lately-ive-received-a-few-compliments-on-activity-7468791822237093889-5xza?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAA4GiKgBpPZXov-UX-LTEP0Z6xGu-D3xUE4",
+  },
+];
+
 export const projects = [
   {
     image: "/images/project-wanderlust.png",

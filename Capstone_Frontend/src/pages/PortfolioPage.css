@@ -30,6 +30,7 @@ body {
 
 .portfolio-hero,
 .journey-section,
+.engineering-highlights,
 .projects-section,
 .capstone-section,
 .portfolio-footer-quote,
@@ -1108,6 +1109,127 @@ body {
 
 /* PROJECTS */
 
+.engineering-highlights {
+  margin-bottom: 2rem;
+  padding: 2rem 7%;
+}
+
+.engineering-highlights-panel {
+  border: 1px solid #ead8c3;
+  border-radius: 12px;
+  background: #fffdf9;
+  box-shadow: 0 12px 30px rgba(34, 27, 17, 0.06);
+  overflow: hidden;
+}
+
+.engineering-highlights-header {
+  padding: 1.8rem 2rem 0;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(213, 154, 43, 0.12), transparent 30%),
+    #fffdf9;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.55rem;
+  color: #c87900;
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.engineering-highlights h2 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.85rem, 2.5vw, 2.45rem);
+  line-height: 1.08;
+  color: #062f28;
+}
+
+.engineering-highlights-header p:not(.section-eyebrow) {
+  max-width: 640px;
+  margin: 0 0 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: #425651;
+}
+
+.engineering-view-all {
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin-top: 0.2rem;
+  color: #c87900;
+  font-family: Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.engineering-highlight-grid {
+  padding: 0 2rem 1.8rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.engineering-highlight-card {
+  min-height: 272px;
+  padding: 1.35rem 1.05rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #ead8c3;
+  border-radius: 10px;
+  background: #fffaf3;
+  box-shadow: 0 8px 18px rgba(34, 27, 17, 0.04);
+}
+
+.linkedin-badge {
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 4px;
+  background: #0a4a40;
+  color: #fffdf9;
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.engineering-highlight-card h3 {
+  margin: 1rem 0 0.65rem;
+  font-size: 1.02rem;
+  line-height: 1.25;
+  color: #062f28;
+}
+
+.engineering-highlight-card p {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #425651;
+}
+
+.engineering-card-cta {
+  margin-top: auto;
+  padding-top: 1rem;
+  color: #c87900;
+  font-family: Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.engineering-view-all:hover,
+.engineering-highlight-card:hover .engineering-card-cta {
+  color: #a56f08;
+}
+
 .projects-section {
   padding: 2rem 7% 4rem;
 }
@@ -1632,6 +1754,7 @@ body {
   }
 
   .portfolio-page .journey-section,
+  .portfolio-page .engineering-highlights,
   .portfolio-page .projects-section {
     padding-left: 5%;
     padding-right: 5%;
@@ -1649,6 +1772,10 @@ body {
 
   .portfolio-page .projects-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .portfolio-page .engineering-highlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1701,6 +1828,10 @@ body {
   .portfolio-page .capstone-image {
     max-width: 680px;
     margin: 0 auto;
+  }
+
+  .portfolio-page .engineering-highlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1882,6 +2013,7 @@ body {
   }
 
   .portfolio-page .journey-section,
+  .portfolio-page .engineering-highlights,
   .portfolio-page .projects-section,
   .portfolio-page .capstone-section,
   .portfolio-page .contact-section {
@@ -1898,6 +2030,9 @@ body {
   .portfolio-page .skill-description,
   .portfolio-page .skill-card-highlights,
   .portfolio-page .implementation-proof,
+  .portfolio-page .engineering-highlights,
+  .portfolio-page .engineering-highlights-header,
+  .portfolio-page .engineering-highlight-card,
   .portfolio-page .project-card,
   .portfolio-page .capstone-content,
   .portfolio-page .capstone-description,
@@ -1976,6 +2111,26 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .portfolio-page .engineering-highlights-header,
+  .portfolio-page .engineering-highlight-grid {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .portfolio-page .engineering-view-all {
+    justify-self: center;
+    margin-top: 0;
+  }
+
+  .portfolio-page .engineering-highlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-page .engineering-highlight-card {
+    min-height: 0;
+    align-items: center;
   }
 
   .portfolio-page .projects-grid {
